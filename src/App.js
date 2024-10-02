@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import SideBar from './components/side-bar/SideBar.Component';
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         </a>
       </header>
     </div>
+    
   );
 }
 
