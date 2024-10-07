@@ -1,0 +1,39 @@
+/* This goes for the global css */
+.profileBar{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 20vw;
+    /* this color need to be changed */
+    background-color: #333;
+    position: fixed;
+    right: -20vw;
+    transition: right 0.3s ease-in-out;
+}
+
+
+/* this goes in this file */
+.profileBar__list{
+    list-style: none;
+    padding:0.5rem;
+}
+
+.profileBar__item{
+    
+    margin: 2rem 0;
+}
+
+.profileBar__link{
+    color: white;
+    text-decoration: none;
+    font-size:1.5rem;
+}
+
+.profileBar__item:hover{
+    background-color: #737171;
+    text-decoration: underline;
+}
+
+.profileBar--visible{
+    right: 0;
+}
