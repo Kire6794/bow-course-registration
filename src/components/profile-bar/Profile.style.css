@@ -1,5 +1,5 @@
 /* This goes for the global css */
-.sideBar{
+.profileBar{
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -7,33 +7,33 @@
     /* this color need to be changed */
     background-color: #333;
     position: fixed;
-    left: -20vw;
-    transition: left 0.3s ease-in-out;
+    right: -20vw;
+    transition: right 0.3s ease-in-out;
 }
 
 
 /* this goes in this file */
-.sideBar__list{
+.profileBar__list{
     list-style: none;
     padding:0.5rem;
 }
 
-.sideBar__item{
+.profileBar__item{
     
     margin: 2rem 0;
 }
 
-.sideBar__link{
+.profileBar__link{
     color: white;
     text-decoration: none;
     font-size:1.5rem;
 }
 
-.sideBar__item:hover{
+.profileBar__item:hover{
     background-color: #737171;
     text-decoration: underline;
 }
 
-.sideBar--visible{
-    left: 0;
+.profileBar--visible{
+    right: 0;
 }
