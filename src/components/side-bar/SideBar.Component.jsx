@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import './Sidebar.style.css';
+
 import UseShowHideSideBar from '../../hooks/UseShowHideSideBar';
 
 // passing the value as props. isVisible is a boolean value 

@@ -15,6 +15,7 @@ const ProfileBar =({isVisibleP})=>{
             <div className={`profileBar ${isVisibleP ? 'profileBar--visible': ''}`}>
                 <ul className='profileBar__list'>
                     <li className='profileBar__item'>
+                        {/* Esto tiene alguna consecuencia mala en react cuando refresca la pagina o no?????? */}
                         <a className='profileBar__link' href='#Dasboard'>Dasboard</a>
                     </li>
                     <li className='profileBar__item'>
