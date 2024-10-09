@@ -1,0 +1,47 @@
+.courses-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .filter-section {
+    margin-bottom: 20px;
+  }
+  
+  .program-section {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .course-card {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .course-header {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  
+  .course-body {
+    display: flex;
+  }
+  
+  .course-body p {
+    text-align: justify;
+    padding-right: 100px;
+  }
+  
+  
+  .course-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
