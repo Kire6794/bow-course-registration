@@ -7,8 +7,8 @@ import ProfileBar from "../components/profile-bar/Profile.Component"
 
 
 // Importamos los hooks personalizados
-import UseShowHideSideBar from '../components/hooks/UseShowHideSideBar';
-import UseShowHideProfileBar from '../components/hooks/UseShowHideProfileBar';
+import UseShowHideSideBar from './hooks/UseShowHideSideBar';
+import UseShowHideProfileBar from './hooks/UseShowHideProfileBar';
 
 function View() {
   // Usamos los hooks personalizados para controlar la visibilidad de las barras laterales
