@@ -1,10 +1,13 @@
-import React,{useState} from 'react';
+import React from 'react';
 import './Profile.style.css';
-import UseShowHideProfileBar from '../../hooks/UseShowHideProfileBar';
+import { Link } from 'react-router-dom'; // Importa Link
+
 
 // passing the value as props
 const ProfileBar =({isVisibleP})=>{
     // const {isVisible,ShowHideSideBar} = UseShowHideSideBar(false);
+ 
+    // agregar el resto de componentes en el ul
 
     return (
         <div>
@@ -14,21 +17,23 @@ const ProfileBar =({isVisibleP})=>{
 
             <div className={`profileBar ${isVisibleP ? 'profileBar--visible': ''}`}>
                 <ul className='profileBar__list'>
-                    <li className='profileBar__item'>
-                        {/* Esto tiene alguna consecuencia mala en react cuando refresca la pagina o no?????? */}
-                        <a className='profileBar__link' href='#Dasboard'>Dasboard</a>
+                    <li className='sideBar__item'>
+                        <Link className='sideBar__link' to="/dashboard">Dashboard</Link>
                     </li>
-                    <li className='profileBar__item'>
-                        <a className='profileBar__link' href='#Profile'>Profile</a>
+                    <li className='sideBar__item'>
+                        <Link className='sideBar__link' to="/profiles">Profiles</Link>
                     </li>
-                    <li className='profileBar__item'>
-                    <a className='profileBar__link' href='#My Courses'>My Courses</a>
+                    <li className='sideBar__item'>
+                        <Link className='sideBar__link' to="/student-list">Student List AdminView</Link>
                     </li>
-                    <li className='profileBar__item'>
-                    <a className='profileBar__link' href='#Contact'>Contact</a>
+                    <li className='sideBar__item'>
+                        <Link className='sideBar__link' to="/forms">Forms AdminView</Link>
                     </li>
-                    <li className='profileBar__item'>
-                    <a className='profileBar__link' href='#Logout'>Logout</a>
+                    <li className='sideBar__item'>
+                        <Link className='sideBar__link' to="/login">Login</Link>
+                    </li>
+                    <li className='sideBar__item'>
+                        <Link className='sideBar__link' to="/signUp">Sing Up</Link>
                     </li>
                 </ul>
                 

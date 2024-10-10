@@ -1,40 +1,48 @@
-import React, { useState } from 'react';
-import './App.css';
-import MenuBar from './components/menu-bar/MenuBar.Component';
-import SideBar from './components/side-bar/SideBar.Component';
-import NavBar from './components/menu/Menu.component';
-import ProfileBar from './components/profile-bar/Profile.Component';
-import UseShowHideSideBar from './hooks/UseShowHideSideBar';
-import UseShowHideProfileBar from './hooks/UseShowHideProfileBar';
-import Courses from './components/coursesMenu/Courses.component';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+
+
+// Importaciones de componentes
+import View from './view/View'; // Importa el componente View
+import Home from './routers/homeMenu/Home.component';
+import Courses from './routers/coursesMenu/Courses.component';
+import Programs from './routers/programsMenu/Programs.component';
+import About from './routers/aboutMenu/About.component';
+import SignUp from './routers/Singupform/SignupForm.component';
+import Dashboard from './routers/dashboard/Dashboard.components';
+import Profiles from './routers/profile/Profile.component';
+import StudentList from './routers/studentLis/StudentLis.components';
+import Forms from './routers/forms/Forms.component';
+import Login from './routers/login/Login.componen';
 
 
 
-const App =()=>{
-  // Call the personalized hooks
-  const {isVisible,ShowHideSideBar} = UseShowHideSideBar(false);
-  const {isVisibleP,ShowHideProfileBar} = UseShowHideProfileBar(false);
 
-  const [selectedProgram, setSelectedProgram] = useState('');
-
+function App() {
   return (
-    <div className="App">
-      <div>
-        <MenuBar ShowHideSideBar={ShowHideSideBar} ShowHideProfileBar={ShowHideProfileBar}></MenuBar>
-
-        {/* passing the function as props to change the state of the bar */}
-       
-        {/* passing the value to the bars to set the state */}
-        <SideBar isVisible = {isVisible}></SideBar>
-        <ProfileBar isVisibleP={isVisibleP}></ProfileBar>
+    <Router>
+      <div className="App">
+        {/* Definir las rutas que navegarán entre los componentes */}
+        <Routes>
+          <Route path="/" element={<View />}>
+            <Route index element={<Home />} />
+            <Route path="programs" element={<Programs />} />
+            <Route path="courses" element={<Courses />} />
+            <Route path="about" element={<About />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="profiles" element={<Profiles/>} />
+            <Route path="student-list" element={<StudentList />} />
+            <Route path="forms" element={<Forms />} />
+            <Route path="login" element={<Login />} />
+          </Route>          
+        </Routes>
       </div>
-      
-      
-      <Courses selectedProgram={selectedProgram}></Courses>
-      
-    </div>
+    </Router>
   );
-}
+};
+ 
+
 
 export default App;
