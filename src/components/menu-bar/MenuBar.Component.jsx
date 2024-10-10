@@ -1,12 +1,8 @@
-import React,{useState} from 'react';
-import MenuIcon from '../../svg/list.svg';
-import ProfileIcon from '../../svg/person-lines-fill.svg';
-
-
+import React from 'react';
+import MenuIcon from '../../iconos/svg/list.svg';
+import ProfileIcon from '../../iconos/svg/person-lines-fill.svg';
 
 const MenuBar = ({ShowHideSideBar,ShowHideProfileBar,titlePage})=>{
-  
-    
 
     return(
       <div>
@@ -26,17 +22,10 @@ const MenuBar = ({ShowHideSideBar,ShowHideProfileBar,titlePage})=>{
           <button className="button" onClick={ShowHideProfileBar} class="btn btn-outline-success" type="submit">
             <img src={ProfileIcon} alt="Menu Icon" width="16" height="16" />
           </button>
-            
-            
-            
-              
-            
           
         </div>
       </nav>
-
-      
-      </div>
+    </div>
     )
 }
 export default MenuBar
