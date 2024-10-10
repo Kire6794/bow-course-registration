@@ -8,8 +8,10 @@ const SideBar =({isVisible})=>{
     
 
     return (
-        <div>
-
+        <div
+       
+        >
+        
             {/* Here i have the boolean value so i can check if its true or false using the ternary operator */}
             <div className={`sideBar ${isVisible ? 'sideBar--visible': ''}`}>
                 <ul className='sideBar__list'>

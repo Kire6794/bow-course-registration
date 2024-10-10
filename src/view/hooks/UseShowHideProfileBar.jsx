@@ -6,7 +6,7 @@ const UseShowHideProfileBar = (initialStateP = false) =>{
     const ShowHideProfileBar=()=>{
         setIsVisibleP(!isVisibleP);
     }
-    return {isVisibleP,ShowHideProfileBar};
+    return {isVisibleP,ShowHideProfileBar, setIsVisibleP};
 }
 
 export default UseShowHideProfileBar;

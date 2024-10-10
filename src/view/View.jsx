@@ -12,12 +12,19 @@ import UseShowHideProfileBar from './hooks/UseShowHideProfileBar';
 
 function View() {
   // Usamos los hooks personalizados para controlar la visibilidad de las barras laterales
-  const { isVisible: isSideBarVisible, ShowHideSideBar } = UseShowHideSideBar(false);
-  const { isVisibleP: isProfileBarVisible, ShowHideProfileBar } = UseShowHideProfileBar(false);
+  const { isVisible: isSideBarVisible, ShowHideSideBar, setIsVisible: setIsSideBarVisible } = UseShowHideSideBar(false); //Modifique un toque los hooks porque necesitaba la setter standard
+  const { isVisibleP: isProfileBarVisible, ShowHideProfileBar, setIsVisibleP: setIsProfileBarVisible } = UseShowHideProfileBar(false); // Ahora devuelve, estado, setter-toggler y setter-std.
+  
+  const HandleOnClick = ()=>{
+    console.log('clicked')
+    setIsSideBarVisible(false)
+    setIsProfileBarVisible(false)
+  }
+
 
   return (
     <>
-      <div className="view-container">
+      <div  className="view-container">
         {/* Pasamos las funciones de control a MenuBar */}
         <MenuBar
           ShowHideSideBar={ShowHideSideBar}
@@ -31,7 +38,9 @@ function View() {
         {/* Barra lateral derecha (ProfileBar) */}
         <ProfileBar isVisibleP={isProfileBarVisible} />
 
-        <div className="view-content">
+        <div 
+        onClick = {HandleOnClick} //Esconde las sidebar sin ir al boton nuevamente. 
+        className="view-content">
           <Outlet />
         </div>
 

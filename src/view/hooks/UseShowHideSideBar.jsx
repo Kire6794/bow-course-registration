@@ -9,7 +9,7 @@ const UseShowHideSideBar = (initialState = false) =>{
         setIsVisible(!isVisible);
     }
     //the hook returns an object with two properties. (I´m using this in the app.js)
-    return {isVisible,ShowHideSideBar};
+    return {isVisible,ShowHideSideBar, setIsVisible};
 }
 
 export default UseShowHideSideBar;
