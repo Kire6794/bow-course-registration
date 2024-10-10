@@ -1,5 +1,5 @@
-import react from 'react';
-import './Menu.style.css';
+import React from 'react';
+import './menu.style.css';
 
 //passing the functions as props to change the values on the event on click
 const NavBar=({ShowHideSideBar,ShowHideProfileBar})=>{

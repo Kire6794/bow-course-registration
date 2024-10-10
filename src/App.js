@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MenuBar from './components/menu-bar/MenuBar.Component';
 import SideBar from './components/side-bar/SideBar.Component';
@@ -7,8 +6,7 @@ import NavBar from './components/menu/Menu.component';
 import ProfileBar from './components/profile-bar/Profile.Component';
 import UseShowHideSideBar from './hooks/UseShowHideSideBar';
 import UseShowHideProfileBar from './hooks/UseShowHideProfileBar';
-import Courses from './components/coursesmenu/Courses.component';
-import React from 'react';
+import Courses from './components/coursesMenu/Courses.component';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
