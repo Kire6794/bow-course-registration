@@ -9,6 +9,7 @@
     position: fixed;
     right: -20vw;
     transition: right 0.3s ease-in-out;
+    z-index: 1000;
 }
 
 
