@@ -14,14 +14,26 @@ import Profiles from './routers/profile/Profile.component';
 import StudentList from './routers/studentLis/StudentLis.components';
 import Forms from './routers/forms/Forms.component';
 import Login from './routers/login/Login.componen';
-import { usersData } from './data/usersData';
+
 
 
 
 function App() {
 
 
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    countryCode: '',
+    phone: '',
+    birthday: '',
+    department: '',
+    program: '',
+    username: '',
+    password: '',
+    role: "Admin"
+  })
   const SetUser = (user)=>{
     setUser(user)
   } 

@@ -12,7 +12,7 @@ import UseShowHideProfileBar from './hooks/UseShowHideProfileBar';
 
 
 //pase user como prop que viene de app.js
-function View({user}) {
+function View({User}) {
   
 
   // Usamos los hooks personalizados para controlar la visibilidad de las barras laterales
