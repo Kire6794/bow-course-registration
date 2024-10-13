@@ -15,24 +15,25 @@ import Profiles from './routers/profile/Profile.component';
 import StudentList from './routers/studentLis/StudentLis.components';
 import Forms from './routers/forms/Forms.component';
 import Login from './routers/login/Login.componen';
-
+import { usersData } from './data/usersData';
 
 
 
 function App() {
+  const user = usersData[1] || {role:'Guest'};
   return (
     <Router>
       <div className="App">
         {/* Definir las rutas que navegarán entre los componentes */}
         <Routes>
-          <Route path="/" element={<View />}>
+          <Route path="/" element={<View user={user}/>}> {/* paso el user para que modificar en el profileSideBar */}
             <Route index element={<Home />} />
             <Route path="programs" element={<Programs />} />
             <Route path="courses" element={<Courses />} />
             <Route path="about" element={<About />} />
             <Route path="signup" element={<SignUp />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="profiles" element={<Profiles/>} />
+            <Route path="dashboard" element={<Dashboard user={user}/>} />
+            <Route path="profiles" element={<Profiles />} />
             <Route path="student-list" element={<StudentList />} />
             <Route path="forms" element={<Forms />} />
             <Route path="login" element={<Login />} />

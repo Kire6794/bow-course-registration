@@ -11,3 +11,6 @@
 
 }
 
+.dashboard__program--visible{
+    display: none;
+}

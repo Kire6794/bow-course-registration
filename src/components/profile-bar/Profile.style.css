@@ -30,11 +30,47 @@
     font-size:1.5rem;
 }
 
+.profileBar--visible{
+    right: 0;
+}
+
 .profileBar__item:hover{
     background-color: #737171;
     text-decoration: underline;
 }
 
-.profileBar--visible{
-    right: 0;
+.profileBar__item--login{
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBar__item--dashboard{
+    display: none;
+}
+
+.profileBar__item--profiles{
+    display: none;
+}
+
+.admin{
+    display: none;
+}
+.profileBar__item--visible{
+    display:flex;
+    flex-direction: column;
+}
+
+.profileBar__item--dashboard--Visible{
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBar__item--profiles--Visible{
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBar__item--login--noVisible{
+    display: none;
+    
 }
