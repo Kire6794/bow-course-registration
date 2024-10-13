@@ -17,7 +17,7 @@ const Card = (props)=>{
     */
 
     return(
-            <div className="card-body">
+            <div className='container my-4'>
                 <p className="card-text"><strong>Profile:</strong></p>
 
                 <div className="course-info" style={{ display: 'flex', justifyContent: 'space-evenly' }}>

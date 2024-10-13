@@ -6,7 +6,6 @@ import './App.css';
 // Importaciones de componentes
 import View from './view/View'; // Importa el componente View
 import Home from './routers/homeMenu/Home.component';
-import Courses from './routers/coursesMenu/Courses.component';
 import Programs from './routers/programsMenu/Programs.component';
 import About from './routers/aboutMenu/About.component';
 import SignUp from './routers/Singupform/SignupForm.component';
@@ -24,7 +23,7 @@ function App() {
   const [user, setUser] = useState({})
   const SetUser = (user)=>{
     setUser(user)
-  }
+  } 
 
 
   return (
@@ -39,7 +38,6 @@ function App() {
             <Route path="dashboard" element={<Dashboard User = {user}/>} />
             <Route path="profiles" element={<Profiles User = {user}/>} /> {/* I get the profile updated with user data that comes from sign up or login*/}
             <Route path="programs" element={<Programs />} />
-            <Route path="courses" element={<Courses />} />
             <Route path="about" element={<About />} />
             <Route path="student-list" element={<StudentList />} />
             <Route path="forms" element={<Forms />} />           

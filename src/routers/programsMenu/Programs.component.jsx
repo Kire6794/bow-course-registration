@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { programsData } from '../../data/programData';
 import './Programs.style.css'; // Asegúrate de tener tu CSS para estilos
-
+import CourseList from '../../components/courses-list/CourseList.Component';
 const Programs = () => {
   const [selectedProgram, setSelectedProgram] = useState(''); // Para manejar el programa seleccionado
 
@@ -12,6 +12,9 @@ const Programs = () => {
   const filteredProgram = selectedProgram
     ? programsData.find(program => program.programName === selectedProgram)
     : null;
+  const filteredCourses = selectedProgram
+    ? programsData.find(program => program.programName === selectedProgram)?.courses
+    : [];
 
   return (
     <div className="container my-4" style={{ display: 'flex', flexDirection: 'column' }}> {/* Bootstrap container for padding */}
@@ -33,6 +36,7 @@ const Programs = () => {
       </div>
 
       {filteredProgram ? (
+        <>
         <div className="card mb-3"> {/* Card for the selected program */}
           <div className="card-header">
             <h2 className="card-title">{filteredProgram.programName}</h2>
@@ -40,7 +44,13 @@ const Programs = () => {
           <div className="card-body">
             <p className="card-text"><strong>Description:</strong> {filteredProgram.programDescription}</p>
           </div>
+          
         </div>
+        <CourseList SelectedProgram={selectedProgram} FilteredCourses={filteredCourses}></CourseList>
+        </>
+      
+         
+        
       ) : (
         <p className="text-center">Please select a program to see the details.</p> // Centered message
       )}
