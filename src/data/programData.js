@@ -136,6 +136,7 @@ export const programsData = [
           deliveryMode: "Online",
           seatsAvailable: 5,
           classSize: 25,
+          
         },
         {
             IDCourse: "SA302",

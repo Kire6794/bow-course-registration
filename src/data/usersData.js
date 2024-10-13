@@ -10,7 +10,7 @@ export const usersData = [
       program: "Software Development",
       username: "john.doe",
       password: "securePassword123",
-      role: "Student",
+      role: "Student",    
     },
     {
       firstName: "Jane",
