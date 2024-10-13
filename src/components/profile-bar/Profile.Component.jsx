@@ -17,9 +17,7 @@ const ProfileBar =({isVisibleP, User})=>{
 
             <div className={`profileBar ${isVisibleP ? 'profileBar--visible': ''}`}>
                 <ul className='profileBar__list'>
-                    {user && user.firstName && (<li className='sideBar__item'>
-                        <Link className='sideBar__link' to="/dashboard">Dashboard</Link>
-                    </li>)}
+                    0
                     {user && user.firstName && (<li className='sideBar__item'>
                         <Link className='sideBar__link' to="/profiles">Profiles</Link>
                     </li>)}
