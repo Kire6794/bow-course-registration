@@ -14,7 +14,7 @@ const SignupForm = ({SetUser}) => {
     department: '',
     program: '',
     username: '',
-    password: ''
+    password: 'Admin'
   });
 
   const [errors, setErrors] = useState({});
