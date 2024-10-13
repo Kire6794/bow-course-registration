@@ -22,18 +22,34 @@ function App() {
 
 
   const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    countryCode: '',
-    phone: '',
-    birthday: '',
-    department: '',
-    program: '',
-    username: '',
-    password: '',
-    role: "Admin"
-  })
+    firstName: "John",
+    lastName: "Doe",
+    email: "johndoe@email.com",
+    phone: "123-456-7890",
+    birthday: "2000-05-15",
+    department: "Software Development",
+    program: "Software Development - Diploma (2 years)",
+    username: "john.doe",
+    password: "securePassword123",
+    role: "Student",
+    courses: [
+      {
+        courseName: "Programming Fundamentals",
+        courseCode: "SD-201",
+        typeTerm: "Spring",
+        courseDay: "Wednesday",
+        courseTime: "1:00 PM - 3:00 PM",
+        deliveryMode: "Online",
+      },
+      {
+        courseName: "Web Programming",
+        courseCode: "SD-203",
+        typeTerm: "Winter",
+        courseDay: "Tuesday",
+        courseTime: "10:00 AM - 12:00 PM",
+        deliveryMode: "In-Person",
+      },
+    ],})
   const SetUser = (user)=>{
     setUser(user)
   } 
