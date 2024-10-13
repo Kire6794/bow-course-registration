@@ -22,9 +22,6 @@ const SideBar =({isVisible})=>{
                         <Link className='sideBar__link' to="/programs">Programs</Link>
                     </li>
                     <li className='sideBar__item'>
-                        <Link className='sideBar__link' to="/courses">Courses</Link>
-                    </li>
-                    <li className='sideBar__item'>
                         <Link className='sideBar__link' to="/about">About</Link>
                     </li>
                 </ul>

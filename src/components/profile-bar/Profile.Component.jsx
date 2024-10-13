@@ -4,16 +4,18 @@ import { Link } from 'react-router-dom'; // Importa Link
 // import { usersData } from '../../data/usersData';
 
 // passing the value as props
-const ProfileBar =({isVisibleP,user})=>{
 
-    //check the user if no user role as guest
-    // const selectedUser = usersData[1] || {role:'Guest'};
+const ProfileBar =({isVisibleP, User})=>{
+    // const {isVisible,ShowHideSideBar} = UseShowHideSideBar(false);
+    const user = User
+    // agregar el resto de componentes en el ul
 
 
     return (
         <div>
             <div className={`profileBar ${isVisibleP ? 'profileBar--visible': ''}`}>
                 <ul className='profileBar__list'>
+               
                     <li className={`profileBar__item profileBar__item--dashboard ${user.role === 'Admin' || user.role === 'Student' ? 'profileBar__item--dashboard--Visible' : ''}`}>
                         <Link className='profileBar__link' to="/dashboard">Dashboard</Link>
                     </li>

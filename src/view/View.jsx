@@ -10,19 +10,20 @@ import ProfileBar from "../components/profile-bar/Profile.Component"
 import UseShowHideSideBar from './hooks/UseShowHideSideBar';
 import UseShowHideProfileBar from './hooks/UseShowHideProfileBar';
 
+
 //pase user como prop que viene de app.js
 function View({user}) {
   
+
   // Usamos los hooks personalizados para controlar la visibilidad de las barras laterales
   const { isVisible: isSideBarVisible, ShowHideSideBar, setIsVisible: setIsSideBarVisible } = UseShowHideSideBar(false); //Modifique un toque los hooks porque necesitaba la setter standard
   const { isVisibleP: isProfileBarVisible, ShowHideProfileBar, setIsVisibleP: setIsProfileBarVisible } = UseShowHideProfileBar(false); // Ahora devuelve, estado, setter-toggler y setter-std.
   
   const HandleOnClick = ()=>{
-    console.log('clicked')
     setIsSideBarVisible(false)
     setIsProfileBarVisible(false)
   }
-
+  const user = User
 
   return (
     <>
@@ -38,7 +39,8 @@ function View({user}) {
         <SideBar isVisible={isSideBarVisible} />
 
         {/* Barra lateral derecha (ProfileBar) */}
-        <ProfileBar isVisibleP={isProfileBarVisible} user={user} />
+
+        <ProfileBar isVisibleP={isProfileBarVisible} User = {user} />
 
 
         <div 
