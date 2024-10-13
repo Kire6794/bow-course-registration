@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 //import './SignupForm.style.css'; // Puedes agregar estilos personalizados aquí
 //import '../App.css';
 
-const SignupForm = () => {
+const SignupForm = ({SetUser}) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -85,7 +85,15 @@ const SignupForm = () => {
     } else {
       setErrors({});
       console.log('User signed up:', formData);
+      SetUser(formData)
+      
       // Aquí agregarías la lógica para enviar los datos al backend
+
+      //Por aqui de el setter del user para pasar la informacion del user recien registrado a los demas componentes
+      //En caso de que despues de registrar se quiera loggear automaticamente al user.
+      // El Login tiene su propio fetch con GET
+      // El SignUp tiene su propio fetch con POST y esperaria los datos del usuario
+      // El usuario enviaria la contrasena pero recibiria su informacion nuevamente sin la contrasena
     }
   };
 

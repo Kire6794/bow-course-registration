@@ -1,7 +1,12 @@
 import React from 'react';
-
-function Profiles() {
-  return <h2>Profiles</h2>;
+import Card from '../../components/card/Card.Component'
+function Profiles(props) {
+  const user = props.User
+  return (
+    <>
+      <Card User={user}></Card>
+    </>
+  )
 }
 
 export default Profiles;

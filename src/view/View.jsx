@@ -16,7 +16,6 @@ function View() {
   const { isVisibleP: isProfileBarVisible, ShowHideProfileBar, setIsVisibleP: setIsProfileBarVisible } = UseShowHideProfileBar(false); // Ahora devuelve, estado, setter-toggler y setter-std.
   
   const HandleOnClick = ()=>{
-    console.log('clicked')
     setIsSideBarVisible(false)
     setIsProfileBarVisible(false)
   }
