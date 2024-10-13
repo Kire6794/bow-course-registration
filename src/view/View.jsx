@@ -10,7 +10,7 @@ import ProfileBar from "../components/profile-bar/Profile.Component"
 import UseShowHideSideBar from './hooks/UseShowHideSideBar';
 import UseShowHideProfileBar from './hooks/UseShowHideProfileBar';
 
-function View() {
+function View({User}) {
   // Usamos los hooks personalizados para controlar la visibilidad de las barras laterales
   const { isVisible: isSideBarVisible, ShowHideSideBar, setIsVisible: setIsSideBarVisible } = UseShowHideSideBar(false); //Modifique un toque los hooks porque necesitaba la setter standard
   const { isVisibleP: isProfileBarVisible, ShowHideProfileBar, setIsVisibleP: setIsProfileBarVisible } = UseShowHideProfileBar(false); // Ahora devuelve, estado, setter-toggler y setter-std.
@@ -19,7 +19,7 @@ function View() {
     setIsSideBarVisible(false)
     setIsProfileBarVisible(false)
   }
-
+  const user = User
 
   return (
     <>
@@ -35,7 +35,7 @@ function View() {
         <SideBar isVisible={isSideBarVisible} />
 
         {/* Barra lateral derecha (ProfileBar) */}
-        <ProfileBar isVisibleP={isProfileBarVisible} />
+        <ProfileBar isVisibleP={isProfileBarVisible} User = {user} />
 
         <div 
         onClick = {HandleOnClick} //Esconde las sidebar sin ir al boton nuevamente. 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = (props)=>{
+const ProfileCard = (props)=>{
 
     const User = props.User
     /*
@@ -38,5 +38,5 @@ const Card = (props)=>{
     )
 }
 
-export default Card
+export default ProfileCard
 

@@ -78,10 +78,12 @@ const SignupForm = ({SetUser}) => {
   };
 
   const handleSubmit = (e) => {
+    //SetUser(null)
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      //SetUser(null)
     } else {
       setErrors({});
       console.log('User signed up:', formData);

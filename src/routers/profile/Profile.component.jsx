@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../../components/card/Card.Component'
+import Card from '../../components/card/ProfileCard.Component'
 function Profiles(props) {
   const user = props.User
   return (

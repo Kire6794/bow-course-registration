@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'; // Importa Link
 
 
 // passing the value as props
-const ProfileBar =({isVisibleP})=>{
+const ProfileBar =({isVisibleP, User})=>{
     // const {isVisible,ShowHideSideBar} = UseShowHideSideBar(false);
- 
+    const user = User
     // agregar el resto de componentes en el ul
 
     return (
@@ -17,18 +17,19 @@ const ProfileBar =({isVisibleP})=>{
 
             <div className={`profileBar ${isVisibleP ? 'profileBar--visible': ''}`}>
                 <ul className='profileBar__list'>
-                    <li className='sideBar__item'>
+                    {user && user.firstName && (<li className='sideBar__item'>
                         <Link className='sideBar__link' to="/dashboard">Dashboard</Link>
-                    </li>
-                    <li className='sideBar__item'>
+                    </li>)}
+                    {user && user.firstName && (<li className='sideBar__item'>
                         <Link className='sideBar__link' to="/profiles">Profiles</Link>
-                    </li>
-                    <li className='sideBar__item'>
+                    </li>)}
+                    {user && user.firstName && ( <li className='sideBar__item'>
                         <Link className='sideBar__link' to="/student-list">Student List AdminView</Link>
-                    </li>
-                    <li className='sideBar__item'>
+                    </li>)}
+                    {user && user.firstName && (<li className='sideBar__item'>
                         <Link className='sideBar__link' to="/forms">Forms AdminView</Link>
-                    </li>
+                    </li>)}
+                    
                     <li className='sideBar__item'>
                         <Link className='sideBar__link' to="/login">Login</Link>
                     </li>
