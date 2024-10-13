@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -20,6 +20,13 @@ import Login from './routers/login/Login.componen';
 
 
 function App() {
+
+  const [user, setUser] = useState({})
+  const SetUser = (user)=>{
+    setUser(user)
+  }
+
+
   return (
     <Router>
       <div className="App">
@@ -27,15 +34,15 @@ function App() {
         <Routes>
           <Route path="/" element={<View />}>
             <Route index element={<Home />} />
+            <Route path="signup" element={<SignUp SetUser = {SetUser} />} /> {/* I pass a method to get the user info fetched from the server inside this component */}
+            <Route path="login" element={<Login SetUser = {SetUser} />} />
+            <Route path="dashboard" element={<Dashboard User = {user}/>} />
+            <Route path="profiles" element={<Profiles User = {user}/>} /> {/* I get the profile updated with user data that comes from sign up or login*/}
             <Route path="programs" element={<Programs />} />
             <Route path="courses" element={<Courses />} />
             <Route path="about" element={<About />} />
-            <Route path="signup" element={<SignUp />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="profiles" element={<Profiles/>} />
             <Route path="student-list" element={<StudentList />} />
-            <Route path="forms" element={<Forms />} />
-            <Route path="login" element={<Login />} />
+            <Route path="forms" element={<Forms />} />           
           </Route>          
         </Routes>
       </div>
