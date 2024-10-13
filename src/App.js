@@ -14,11 +14,12 @@ import Profiles from './routers/profile/Profile.component';
 import StudentList from './routers/studentLis/StudentLis.components';
 import Forms from './routers/forms/Forms.component';
 import Login from './routers/login/Login.componen';
-
+import { usersData } from './data/usersData';
 
 
 
 function App() {
+
 
   const [user, setUser] = useState({})
   const SetUser = (user)=>{
@@ -26,12 +27,13 @@ function App() {
   } 
 
 
+
   return (
     <Router>
       <div className="App">
         {/* Definir las rutas que navegarán entre los componentes */}
         <Routes>
-          <Route path="/" element={<View User ={user} />}>
+          <Route path="/" element={<View user={user}/>}> {/* paso el user para que modificar en el profileSideBar */}
             <Route index element={<Home />} />
             <Route path="signup" element={<SignUp SetUser = {SetUser} />} /> {/* I pass a method to get the user info fetched from the server inside this component */}
             <Route path="login" element={<Login SetUser = {SetUser} />} />
