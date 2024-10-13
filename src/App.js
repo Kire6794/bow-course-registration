@@ -45,7 +45,7 @@ function App() {
       <div className="App">
         {/* Definir las rutas que navegarán entre los componentes */}
         <Routes>
-          <Route path="/" element={<View user={user}/>}> {/* paso el user para que modificar en el profileSideBar */}
+          <Route path="/" element={<View User={user}/>}> {/* paso el user para que modificar en el profileSideBar */}
             <Route index element={<Home />} />
             <Route path="signup" element={<SignUp SetUser = {SetUser} />} /> {/* I pass a method to get the user info fetched from the server inside this component */}
             <Route path="login" element={<Login SetUser = {SetUser} />} />
