@@ -22,6 +22,9 @@ const ProfileBar =({isVisibleP, User})=>{
                     <li className={`profileBar__item profileBar__item--profiles ${user.role === 'Admin' || user.role === 'Student' ? 'profileBar__item--profiles--Visible' : ''}`}>
                         <Link className='profileBar__link' to="/profiles">Profiles</Link>
                     </li>
+                    <li className={`profileBar__item profileBar__item--profiles ${user.role === 'Student' ? 'profileBar__item--profiles--Visible' : ''}`}>
+                        <Link className='profileBar__link' to="/addCourses">Add Courses</Link>
+                    </li>
                     <li className={`profileBar__item admin ${user.role === 'Admin' ? 'profileBar__item--visible': ''} `}>
                         <Link className='profileBar__link' to="/student-list">Student List</Link>
                     </li>

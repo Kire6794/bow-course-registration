@@ -1,7 +1,10 @@
 import React from "react"
+
 const Course = ({Course,CourseIndex})=>{
     const course =Course
     const courseIndex = CourseIndex
+
+    
     return(
         <div key={courseIndex} className="card mb-3"> {/* Card for each course */}
               <div className="card-header">

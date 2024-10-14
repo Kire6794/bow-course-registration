@@ -11,6 +11,7 @@ import About from './routers/aboutMenu/About.component';
 import SignUp from './routers/Singupform/SignupForm.component';
 import Dashboard from './routers/dashboard/Dashboard.components';
 import Profiles from './routers/profile/Profile.component';
+import AddCourses from './routers/addCourses/AddCourses.Component'
 import StudentList from './routers/studentLis/StudentLis.components';
 import Forms from './routers/forms/Forms.component';
 import Login from './routers/login/Login.componen';
@@ -22,34 +23,36 @@ function App() {
 
 
   const [user, setUser] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "johndoe@email.com",
-    phone: "123-456-7890",
-    birthday: "2000-05-15",
+    firstName: "Michael",
+    lastName: "Johnson",
+    email: "michaeljohnson@email.com",
+    phone: "555-123-4567",
+    birthday: "2001-03-10",
     department: "Software Development",
-    program: "Software Development - Diploma (2 years)",
-    username: "john.doe",
-    password: "securePassword123",
+    program: "Certificate (6 months)",
+    username: "michael.johnson",
+    password: "mjPass789",
     role: "Student",
     courses: [
       {
-        courseName: "Programming Fundamentals",
-        courseCode: "SD-201",
+        courseName: "HTML & CSS Basics",
+        courseCode: "SD-402",
         typeTerm: "Spring",
         courseDay: "Wednesday",
         courseTime: "1:00 PM - 3:00 PM",
         deliveryMode: "Online",
       },
       {
-        courseName: "Web Programming",
-        courseCode: "SD-203",
-        typeTerm: "Winter",
-        courseDay: "Tuesday",
-        courseTime: "10:00 AM - 12:00 PM",
+        courseName: "JavaScript Essentials",
+        courseCode: "SD-403",
+        typeTerm: "Summer",
+        courseDay: "Thursday",
+        courseTime: "2:00 PM - 4:00 PM",
         deliveryMode: "In-Person",
       },
     ],})
+
+
   const SetUser = (user)=>{
     setUser(user)
   } 
@@ -63,10 +66,11 @@ function App() {
         <Routes>
           <Route path="/" element={<View User={user}/>}> {/* paso el user para que modificar en el profileSideBar */}
             <Route index element={<Home />} />
-            <Route path="signup" element={<SignUp SetUser = {SetUser} />} /> {/* I pass a method to get the user info fetched from the server inside this component */}
+            <Route path="signup" element={<SignUp User={user} SetUser = {SetUser} />} /> {/* I pass a method to get the user info fetched from the server inside this component */}
             <Route path="login" element={<Login SetUser = {SetUser} />} />
             <Route path="dashboard" element={<Dashboard User = {user}/>} />
             <Route path="profiles" element={<Profiles User = {user}/>} /> {/* I get the profile updated with user data that comes from sign up or login*/}
+            <Route path="addCourses" element={<AddCourses User = {user} SetUser = {SetUser}/>} />
             <Route path="programs" element={<Programs />} />
             <Route path="about" element={<About />} />
             <Route path="student-list" element={<StudentList />} />
