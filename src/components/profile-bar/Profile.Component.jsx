@@ -14,13 +14,17 @@ const ProfileBar =({isVisibleP, User})=>{
     return (
         <div>
             <div className={`profileBar ${isVisibleP ? 'profileBar--visible': ''}`}>
-                <ul className='profileBar__list'>
-               
+                <ul className='profileBar__list'>               
                     <li className={`profileBar__item profileBar__item--dashboard ${user.role === 'Admin' || user.role === 'Student' ? 'profileBar__item--dashboard--Visible' : ''}`}>
                         <Link className='profileBar__link' to="/dashboard">Dashboard</Link>
                     </li>
                     <li className={`profileBar__item profileBar__item--profiles ${user.role === 'Admin' || user.role === 'Student' ? 'profileBar__item--profiles--Visible' : ''}`}>
                         <Link className='profileBar__link' to="/profiles">Profiles</Link>
+                    </li>
+                    <li className={`profileBar__item profileBar__item--profiles ${user.role === 'Student' ? 'profileBar__item--profiles--Visible' : ''}`}>
+                        <Link className='profileBar__link' to="/addCourses">Add Courses</Link>
+                    <li className={` profileBar__item profileBar__item--courses ${ user.role === 'Student' ? 'profileBar__item--courses--Visible' : ''}`}>
+                        <Link className='profileBar__link' to="/mycourses">My Courses</Link>
                     </li>
                     <li className={`profileBar__item admin ${user.role === 'Admin' ? 'profileBar__item--visible': ''} `}>
                         <Link className='profileBar__link' to="/student-list">Student List</Link>
@@ -34,8 +38,7 @@ const ProfileBar =({isVisibleP, User})=>{
                     <li className={`profileBar__item profileBar__item--login ${user.role === 'Admin'|| user.role==='Student' ? 'profileBar__item--login--noVisible' : ''}`}>
                         <Link className='sideBar__link' to="/signUp">Sing Up</Link>
                     </li>
-                </ul>
-                
+                </ul>                
             </div>
         </div>
     );
