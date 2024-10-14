@@ -51,6 +51,9 @@
 .profileBar__item--profiles{
     display: none;
 }
+.profileBar__item--courses{
+    display: none;
+}
 
 .admin{
     display: none;
@@ -66,6 +69,11 @@
 }
 
 .profileBar__item--profiles--Visible{
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBar__item--courses--Visible{
     display: flex;
     flex-direction: column;
 }
