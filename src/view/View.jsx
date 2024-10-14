@@ -1,4 +1,5 @@
 import React from "react"
+import './view.style.css'
 import { Outlet } from "react-router-dom";
 import Footer from "../components/footer/Footer.component";
 import MenuBar from "../components/menu-bar/MenuBar.Component";

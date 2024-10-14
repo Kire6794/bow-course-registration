@@ -289,5 +289,6 @@ export const programsData = [
         classSize: 15,
       },
     ],
-  },
-];
+  }
+]
+

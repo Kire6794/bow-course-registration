@@ -6,14 +6,15 @@ const Programs = () => {
   const [selectedProgram, setSelectedProgram] = useState(''); // Para manejar el programa seleccionado
 
   // Obtener los nombres de los programas para el filtro
-  const programNames = programsData.map(program => program.programName);
+  const programTypes = programsData.map(program => program.programType);
 
   // Filtrar programa seleccionado
   const filteredProgram = selectedProgram
-    ? programsData.find(program => program.programName === selectedProgram)
+    ? programsData.find(program => program.programType === selectedProgram)
     : null;
+
   const filteredCourses = selectedProgram
-    ? programsData.find(program => program.programName === selectedProgram)?.courses
+    ? programsData.find(program => program.programType === selectedProgram)?.courses
     : [];
 
   return (
@@ -29,7 +30,7 @@ const Programs = () => {
           onChange={(e) => setSelectedProgram(e.target.value)}
         >
           <option value="">--Select a Program--</option>
-          {programNames.map((program, index) => (
+          {programTypes.map((program, index) => (
             <option key={index} value={program}>{program}</option>
           ))}
         </select>
