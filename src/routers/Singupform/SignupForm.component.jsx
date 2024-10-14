@@ -3,19 +3,8 @@ import React, { useState } from 'react';
 //import './SignupForm.style.css'; // Puedes agregar estilos personalizados aquí
 //import '../App.css';
 
-const SignupForm = ({SetUser}) => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    countryCode: '',
-    phone: '',
-    birthday: '',
-    department: '',
-    program: '',
-    username: '',
-    password: 'Admin'
-  });
+const SignupForm = ({User,SetUser}) => {
+  const [formData, setFormData] = useState(User);
 
   const [errors, setErrors] = useState({});
 
@@ -83,7 +72,7 @@ const SignupForm = ({SetUser}) => {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      //SetUser(null)
+      SetUser(formData)
     } else {
       setErrors({});
       console.log('User signed up:', formData);
