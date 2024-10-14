@@ -14,7 +14,10 @@ import Profiles from './routers/profile/Profile.component';
 import StudentList from './routers/studentLis/StudentLis.components';
 import Forms from './routers/forms/Forms.component';
 import Login from './routers/login/Login.componen';
+import StudentCourses from './routers/courses/CoursesStudent.components';
 import { usersData } from './data/usersData';
+
+
 
 
 
@@ -49,7 +52,9 @@ function App() {
         courseTime: "10:00 AM - 12:00 PM",
         deliveryMode: "In-Person",
       },
-    ],})
+    ],
+    
+    })
   const SetUser = (user)=>{
     setUser(user)
   } 
@@ -68,6 +73,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard User = {user}/>} />
             <Route path="profiles" element={<Profiles User = {user}/>} /> {/* I get the profile updated with user data that comes from sign up or login*/}
             <Route path="programs" element={<Programs />} />
+            <Route path="mycourses" element={<StudentCourses User={user} SetUser={SetUser} />} />
             <Route path="about" element={<About />} />
             <Route path="student-list" element={<StudentList />} />
             <Route path="forms" element={<Forms />} />           

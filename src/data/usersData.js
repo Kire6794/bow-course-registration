@@ -79,6 +79,13 @@ export const usersData = [
         courseDay: "Thursday",
         courseTime: "2:00 PM - 4:00 PM",
         deliveryMode: "In-Person",
+      },{
+        courseName: "Advanced Programming",
+        courseCode: "SD-301",
+        typeTerm: "Spring",
+        courseDay: "Wednesday",
+        courseTime: "10:00 AM - 12:00 PM",
+        deliveryMode: "Online",
       },
     ],
   },
