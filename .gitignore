@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.vsidx
+/.vs/bow-course-registration/FileContentIndex/a062e234-72a3-47c0-be9d-f201a9f8ebb2.vsidx
+/.vs/CMakeWorkspaceSettings.json
+/.vs/slnx.sqlite
+/.gitignore
