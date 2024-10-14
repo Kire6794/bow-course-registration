@@ -1,24 +1,25 @@
 import React from 'react'
 
-const Selector = ({Category})=>{
+const Selector = ({Category,Items, SetSelectorValue, SelectedValue})=>{
 
-    const [selectedItem, setSelectedItem] = useState(''); // Para manejar el programa seleccionado
 
     return(
         <div className="mb-3">
-            <label htmlFor="program-select" className="form-label">Select a {Category}:</label>
-            <select
-            
-            className="form-select"
-            value={selectedItem}
-            onChange={(e) => setSelectedItem(e.target.value)}
-            >
-            <option value="">--Select a Program--</option>
-            {programNames.map((program, index) => (
-                <option key={index} value={program}>{program}</option>
-            ))}
-            </select>
-        </div>
+        <label htmlFor="program-select" className="form-label">Select a {Category}:</label>
+        <select
+          id="program-select"
+          className="form-select"
+          value={SelectedValue}
+          onChange={(e) => SetSelectorValue(e.target.value)}
+        >
+          <option value="">--Select a Program--</option>
+
+          {Items.map((item, index) => (
+            <option key={index} value={item}>{item}</option>
+          ))}
+          
+        </select>
+      </div>
     )
 }
 
