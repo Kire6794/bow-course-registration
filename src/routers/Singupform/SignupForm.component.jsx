@@ -65,6 +65,11 @@ const SignupForm = ({User,SetUser}) => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const handleRadioChange = (e) => {
+    setFormData({ ...formData, ["role"]: e.target.value })
+  }
+    ;
+  
 
   const handleSubmit = (e) => {
     //SetUser(null)
@@ -203,6 +208,27 @@ const SignupForm = ({User,SetUser}) => {
           onChange={handleChange}
         />
         {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+      </div>
+      <div className="mb-3">
+        <label>
+          <input
+            value="Student"
+            type="radio"
+            name="role"
+            onChange={handleRadioChange}
+          />
+          Student
+        </label>
+        <label className="ms-3">
+          <input
+            value="Admin"
+            type="radio"
+            name="role"
+            onChange={handleRadioChange}
+          />
+          Admin
+        </label>
+        {errors.role && <div className="invalid-feedback">{errors.role}</div>}
       </div>
 
       <button type="submit" className="btn btn-primary">Sign Up</button>
