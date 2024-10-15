@@ -50,6 +50,7 @@ const SignupForm = () => {
                 const response = await mockApiCall(formData);
                 console.log('Success:', response);
                 setLoading(false);  // Hide loading
+                
             } catch (error) {
                 console.error('Error during sign up:', error);
                 setLoading(false);  // Hide loading

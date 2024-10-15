@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';  // To handle navigation
+
 import { usersData } from '../../data/usersData';
 
 const LoginForm = ({User,SetUser}) => {
     const [formData, setFormData] = useState({User});
+
 
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -32,6 +34,7 @@ const LoginForm = ({User,SetUser}) => {
             setLoading(true);
             try {
                 const response = await mockApiCall(formData);
+
                 //we get the role from the token
                 //And add it to the formData
                 
@@ -53,8 +56,6 @@ const LoginForm = ({User,SetUser}) => {
 
     const mockApiCall = (data) => {
 
-
-
       return new Promise((resolve) => {
 
             setTimeout(() => {
@@ -65,6 +66,7 @@ const LoginForm = ({User,SetUser}) => {
               resolve({ message: 'Login successful', data });
             }, 2000);
       });
+
     };
 
     const goToSignup = () => {
@@ -121,4 +123,6 @@ const LoginForm = ({User,SetUser}) => {
     );
 };
 
+
 export default LoginForm;
+

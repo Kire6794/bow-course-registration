@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 //import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 //import './SignupForm.style.css'; // Puedes agregar estilos personalizados aquí
@@ -234,6 +235,8 @@ const SignupForm = ({User,SetUser}) => {
       <button type="submit" className="btn btn-primary">Sign Up</button>
     </form>
   );
+
+
 };
 
 export default SignupForm;

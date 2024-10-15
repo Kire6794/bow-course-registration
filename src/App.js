@@ -77,6 +77,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+        
         {/* Definir las rutas que navegarán entre los componentes */}
         <Routes>
           <Route path="/" element={<View User={user}/>}> {/* paso el user para que modificar en el profileSideBar */}
