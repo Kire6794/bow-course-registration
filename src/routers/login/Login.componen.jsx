@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';  // To handle navigation
 
-const LoginForm = () => {
-    const [formData, setFormData] = useState({
-        username: '',
-        password: '',
-    });
+import { usersData } from '../../data/usersData';
+
+const LoginForm = ({User,SetUser}) => {
+    const [formData, setFormData] = useState({User});
+
 
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -35,8 +35,13 @@ const LoginForm = () => {
             try {
                 const response = await mockApiCall(formData);
 
-                // Store username in local storage
-                localStorage.setItem('username', formData.username);
+                //we get the role from the token
+                //And add it to the formData
+                
+                SetUser(response.data)
+
+                // Store token in local storage/session/cookies
+                //localStorage.setItem('token', response.header.token);
 
                 console.log('Login success:', response);
                 setLoading(false);
@@ -50,11 +55,18 @@ const LoginForm = () => {
     };
 
     const mockApiCall = (data) => {
-        return new Promise((resolve) => {
+
+      return new Promise((resolve) => {
+
             setTimeout(() => {
-                resolve({ message: 'Login successful', data });
+              console.log(data)
+              console.log(usersData[0])
+              data = usersData.find(user=> user.username===data.username && user.password===data.password)
+              if(!data) throw Error('Invalid username or password')
+              resolve({ message: 'Login successful', data });
             }, 2000);
-        });
+      });
+
     };
 
     const goToSignup = () => {
@@ -111,4 +123,6 @@ const LoginForm = () => {
     );
 };
 
+
 export default LoginForm;
+
