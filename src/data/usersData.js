@@ -14,7 +14,7 @@ export const usersData = [
     courses: [
       {
         courseName: "Programming Fundamentals",
-        courseCode: "SD-201",
+        codeCourse: "SD-201",
         typeTerm: "Spring",
         courseDay: "Wednesday",
         courseTime: "1:00 PM - 3:00 PM",
@@ -22,7 +22,7 @@ export const usersData = [
       },
       {
         courseName: "Web Programming",
-        courseCode: "SD-203",
+        codeCourse: "SD-203",
         typeTerm: "Winter",
         courseDay: "Tuesday",
         courseTime: "10:00 AM - 12:00 PM",
@@ -44,7 +44,7 @@ export const usersData = [
     courses: [
       {
         courseName: "Advanced Programming",
-        courseCode: "SD-301",
+        codeCourse: "SD-301",
         typeTerm: "Spring",
         courseDay: "Wednesday",
         courseTime: "10:00 AM - 12:00 PM",
@@ -66,7 +66,7 @@ export const usersData = [
     courses: [
       {
         courseName: "HTML & CSS Basics",
-        courseCode: "SD-402",
+        codeCourse: "SD-402",
         typeTerm: "Spring",
         courseDay: "Wednesday",
         courseTime: "1:00 PM - 3:00 PM",
@@ -74,14 +74,14 @@ export const usersData = [
       },
       {
         courseName: "JavaScript Essentials",
-        courseCode: "SD-403",
+        codeCourse: "SD-403",
         typeTerm: "Summer",
         courseDay: "Thursday",
         courseTime: "2:00 PM - 4:00 PM",
         deliveryMode: "In-Person",
       },{
         courseName: "Advanced Programming",
-        courseCode: "SD-301",
+        codeCourse: "SD-301",
         typeTerm: "Spring",
         courseDay: "Wednesday",
         courseTime: "10:00 AM - 12:00 PM",
@@ -116,7 +116,7 @@ export const usersData = [
     courses: [
       {
         courseName: "User Experience Design",
-        courseCode: "SD-304",
+        codeCourse: "SD-304",
         typeTerm: "Winter",
         courseDay: "Monday",
         courseTime: "3:00 PM - 5:00 PM",
@@ -151,7 +151,7 @@ export const usersData = [
     courses: [
       {
         courseName: "Basic Software Testing",
-        courseCode: "SD-405",
+        codeCourse: "SD-405",
         typeTerm: "Fall",
         courseDay: "Friday",
         courseTime: "1:00 PM - 3:00 PM",
@@ -186,7 +186,7 @@ export const usersData = [
     courses: [
       {
         courseName: "Capstone Project",
-        courseCode: "SD-406",
+        codeCourse: "SD-406",
         typeTerm: "Winter",
         courseDay: "Monday",
         courseTime: "3:00 PM - 5:00 PM",
