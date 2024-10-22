@@ -182,7 +182,7 @@ const SignupForm = ({User,SetUser}) => {
           onChange={handleChange}
         >
           <option value="">Select Program</option>
-          <option value="Diploma">Diploma (2 years)</option>
+          <option value="Diploma (2 years)">Diploma (2 years)</option>
           <option value="Post-Diploma">Post-Diploma (1 year)</option>
           <option value="Certificate">Certificate (6 months)</option>
         </select>
