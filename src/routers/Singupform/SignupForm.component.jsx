@@ -183,8 +183,8 @@ const SignupForm = ({User,SetUser}) => {
         >
           <option value="">Select Program</option>
           <option value="Diploma (2 years)">Diploma (2 years)</option>
-          <option value="Post-Diploma">Post-Diploma (1 year)</option>
-          <option value="Certificate">Certificate (6 months)</option>
+          <option value="Post-Diploma (1 year)">Post-Diploma (1 year)</option>
+          <option value="Certificate (6 months)">Certificate (6 months)</option>
         </select>
         {errors.program && <div className="invalid-feedback">{errors.program}</div>}
       </div>
