@@ -2,14 +2,14 @@ import React from 'react';
 
 const StudentCourses = ({ User,SetUser }) => {
 
-  const removeCourse = (courseCode) =>{
+  const removeCourse = (codeCourse) =>{
     //in react when i use setUser inside a function, recives the actual user as prevUser
     SetUser((prevUser)=>({
 
       //im passing the prevUser as the state just before changing it,so i create a copy with the spreed operator
             //just to change a propertie and save the others
       ...prevUser,
-      courses: prevUser.courses.filter((course)=>course.courseCode !== courseCode),
+      courses: prevUser.courses.filter((course)=>course.codeCourse !== codeCourse),
     }))
   }
 
@@ -27,8 +27,8 @@ const StudentCourses = ({ User,SetUser }) => {
           {User.courses.map((course, index) => (
             <div key={index} className="card mb-3">
               <div className="card-header">
-                <h5 className="card-title">{course.courseName} ({course.courseCode})</h5>
-                <p className="card-subtitle mb-2 text-muted"><strong>Code:</strong> {course.courseCode}</p>
+                <h5 className="card-title">{course.courseName} ({course.codeCourse})</h5>
+                <p className="card-subtitle mb-2 text-muted"><strong>Code:</strong> {course.codeCourse}</p>
               </div>
 
               <div className="card-body">
@@ -41,7 +41,7 @@ const StudentCourses = ({ User,SetUser }) => {
                   </div>
                 </div>
                 {/* i have to pass the function onClick like this: ()=>removeCourse.... to prevent the execution of it in the first render. */}
-                <button className='btn btn-danger mt-3' onClick={()=>removeCourse(course.courseCode)}>Drop course</button>
+                <button className='btn btn-danger mt-3' onClick={()=>removeCourse(course.codeCourse)}>Drop course</button>
                 
               </div>
             </div>
