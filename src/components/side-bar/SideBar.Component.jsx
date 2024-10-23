@@ -16,7 +16,7 @@ const SideBar =({isVisible})=>{
             <div className={`sideBar ${isVisible ? 'sideBar--visible': ''}`}>
                 <ul className='sideBar__list'>
                     <li className='sideBar__item'>
-                        <Link className='sideBar__link' to="/">Home</Link> {/* Cambiado a Link */}
+                        <Link className='sideBar__link' to="/Home">Home</Link> {/* Cambiado a Link */}
                     </li>
                     <li className='sideBar__item'>
                         <Link className='sideBar__link' to="/programs">Programs</Link>

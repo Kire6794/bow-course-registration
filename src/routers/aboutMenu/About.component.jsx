@@ -9,6 +9,7 @@ const About = () => {
     name: '',
     email: '',
     date: '',
+    about: '',
     message: '',
   });
 
@@ -26,6 +27,7 @@ const About = () => {
       name: '',
       email: '',
       date: '',
+      about: '',
       message: '',
     });
   };
@@ -77,20 +79,35 @@ const About = () => {
           </label>
         </div>
         <div className="mb-3">
-          <label className="form-label">
-            Message:
+          <label className="form-label">     About:     </label>
+            
+            <textarea
+              name="about"
+              className="form-control"
+              rows="1"
+              value={formData.about}
+              onChange={handleChange}
+              required
+            />
+
+        </div>
+        <div className="mb-3">
+          <label className="form-label">    Message:      </label>
+            
             <textarea
               name="message"
               className="form-control"
+              rows="3"
               value={formData.message}
               onChange={handleChange}
               required
             />
-          </label>
+
         </div>
-        <button type="submit" className="btn btn-primary">Enviar</button>
+        <button type="submit" className="btn btn-primary mb-3">Enviar</button>
       </form>
     </div>
+    
   );
 };
 
