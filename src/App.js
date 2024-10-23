@@ -13,7 +13,7 @@ import Dashboard from './routers/dashboard/Dashboard.components';
 import Profiles from './routers/profile/Profile.component';
 import AddCourses from './routers/addCourses/AddCourses.Component'
 import StudentList from './routers/studentLis/StudentLis.components';
-import Forms from './routers/forms/Forms.component';
+import Forms from './routers/forms/AdminForms.Component';
 import Login from './routers/login/Login.componen';
 import StudentCourses from './routers/courses/CoursesStudent.components';
 
@@ -53,17 +53,17 @@ import StudentCourses from './routers/courses/CoursesStudent.components';
 function App() {
 
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    birthday: "",
-    department: "",
-    program: "",
-    username: "",
-    password: "",
-    role: "",
-    courses: [],
+    firstName: "Robert",
+    lastName: "Miller",
+    email: "robertmiller@email.com",
+    countryCode: "+1",
+    phone: "654-987-3210",
+    birthday: "1975-06-10",
+    department: "Software Development",
+    program: null,
+    username: "robert.miller",
+    password: "adminRobert123",
+    role: "Admin",
 })
 
   const SetUser = (user)=>{
