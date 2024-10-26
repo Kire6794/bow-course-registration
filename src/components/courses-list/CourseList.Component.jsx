@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Course from './Course.Component';
 
-const CourseList = ({ SelectedProgram, FilteredCourses, onAddCourse, onEditCourse, onDeleteCourse, editingCourse, onSaveEdit }) => {
+const CourseList = ({ SelectedProgram, FilteredCourses, onAddCourse, onEditCourse, onDeleteCourse, editingCourse, onSaveEdit, User }) => {
     const [newCourse, setNewCourse] = useState({
         IDCourse: '',
         courseName: '',
@@ -52,6 +52,7 @@ const CourseList = ({ SelectedProgram, FilteredCourses, onAddCourse, onEditCours
             <h2 className="mb-3">Courses for: {SelectedProgram}</h2>
 
             {/* Add New Course Form */}
+            {User.role === "Admin" ? (
             <div className="add-course-form mb-3">
                 <input
                     type="text"
@@ -135,6 +136,9 @@ const CourseList = ({ SelectedProgram, FilteredCourses, onAddCourse, onEditCours
                 />
                 <button onClick={handleAddCourse} className="btn btn-primary">Add New Course</button>
             </div>
+            )
+        :
+        null}
 
             {/* Display Course List */}
             {FilteredCourses.map((course) => (
@@ -151,17 +155,25 @@ const CourseList = ({ SelectedProgram, FilteredCourses, onAddCourse, onEditCours
                                 className="form-control mb-2"
                             />
                             {/* Other input fields for editing */}
+                            {User.role ==="Admin" ? (
+                                <>
                             <button onClick={handleSaveEdit} className="btn btn-success">Save</button>
                             <button onClick={() => onEditCourse(null)} className="btn btn-secondary ml-2">Cancel</button>
+                            </>
+                        ):
+                        null}
                         </>
                     ) : (
                         // View Mode
                         <>
                             <Course Course={course} />
+                            {User.role === "Admin" ? (
                             <div className="admin-actions mt-2">
                                 <button onClick={() => onEditCourse(course)} className="btn btn-warning mx-1">Edit</button>
                                 <button onClick={() => onDeleteCourse(course.IDCourse)} className="btn btn-danger mx-1">Delete</button>
                             </div>
+                            ):
+                            null}
                         </>
                     )}
                 </div>
