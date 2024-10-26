@@ -1,11 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\public",
     "\\src",
-    "\\src\\Components",
-    "\\src\\pages"
+    "\\src\\components",
+    "\\src\\routers",
+    "\\src\\routers\\coursesMenu"
   ],
-  "SelectedNode": "\\src\\index.css",
+  "SelectedNode": "\\src\\App.js",
   "PreviewInSolutionExplorer": false
 }

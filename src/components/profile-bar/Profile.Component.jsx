@@ -5,10 +5,13 @@ import { Link } from 'react-router-dom'; // Importa Link
 
 // passing the value as props
 
-const ProfileBar =({isVisibleP, User})=>{
+const ProfileBar =({isVisibleP, User, SetUser})=>{
     // const {isVisible,ShowHideSideBar} = UseShowHideSideBar(false);
-  
+    
     // agregar el resto de componentes en el ul
+    const LogOutUser = ()=>{
+        SetUser({...User, ["role"]:""})
+    }
 
 
     return (
@@ -38,6 +41,9 @@ const ProfileBar =({isVisibleP, User})=>{
                     </li>
                     <li className={`profileBar__item profileBar__item--login ${User.role === 'Admin'|| User.role==='Student' ? 'profileBar__item--login--noVisible' : ''}`}>
                         <Link className='sideBar__link' to="/signUp">Sing Up</Link>
+                    </li>
+                    <li className={`profileBar__item profileBar__item--login ${User.role === 'Admin'|| User.role==='Student' ? 'profileBar__item--login--Visible' : 'profileBar__item--login--noVisible'}`}>
+                        <Link className='sideBar__link' to="/login" onClick={LogOutUser}>Sing Out</Link>
                     </li>
                 </ul>                
             </div>
