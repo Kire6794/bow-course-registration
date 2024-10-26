@@ -30,7 +30,7 @@ const About = () => {
       about: '',
       message: '',
     });
-  };
+    };
 
   return (
     <div className="container my-4">
