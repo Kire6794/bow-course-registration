@@ -11,7 +11,7 @@ const AddCourse = ({Course,CourseIndex, User, SetUser, SetWasCourseAdded})=>{
     const AddCourse = ()=>{
       let currentStudent = {...User}
 
-      if(currentStudent.courses.includes(Course))
+      if(User.courses.includes(Course))
         SetWasCourseAdded(false,Course,{existingCourse: `Invalid : Course ${Course.IDCourse} has been already added.`} )
 
       else {

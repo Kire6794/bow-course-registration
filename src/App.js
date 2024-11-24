@@ -60,10 +60,10 @@ function App() {
     phone: "654-987-3210",
     birthday: "1975-06-10",
     department: "Software Development",
-    program: null,
+    program: "Certificate (6 months)",
     username: "robert.miller",
     password: "adminRobert123",
-    role: "Admin",
+    role: "Student",
 })
 
   const SetUser = (user)=>{
