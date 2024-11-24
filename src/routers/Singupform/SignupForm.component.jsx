@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 //import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 //import './SignupForm.style.css'; // Puedes agregar estilos personalizados aquí
 //import '../App.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const SignupForm = ({User,SetUser}) => {
   const [formData, setFormData] = useState(User);
 
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
 
   const validate = () => {
     const newErrors = {};
@@ -91,6 +94,9 @@ const SignupForm = ({User,SetUser}) => {
       // El Login tiene su propio fetch con GET
       // El SignUp tiene su propio fetch con POST y esperaria los datos del usuario
       // El usuario enviaria la contrasena pero recibiria su informacion nuevamente sin la contrasena
+
+      //If the login is ok go to the dashboard
+      navigate('/dashboard')
     }
   };
 
