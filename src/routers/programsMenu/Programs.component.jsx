@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { programsData } from '../../data/programData';
 import CourseList from '../../components/courses-list/CourseList.Component';
 
-const Programs = () => {
+const Programs = ({User}) => {
     const [selectedProgram, setSelectedProgram] = useState('Diploma (2 years)'); // Default program
     const [programs, setPrograms] = useState(programsData); // Store a copy of programsData for state manipulation
     const [editingCourse, setEditingCourse] = useState(null); // Store the course being edited
@@ -72,6 +72,7 @@ const Programs = () => {
 
             {filteredProgram ? (
                 <CourseList
+                    User = {User}
                     SelectedProgram={selectedProgram}
                     FilteredCourses={filteredCourses}
                     onAddCourse={addCourse}

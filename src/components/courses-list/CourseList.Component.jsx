@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Course from './Course.Component';
 
-const CourseList = ({ SelectedProgram, FilteredCourses, onAddCourse, onEditCourse, onDeleteCourse, editingCourse, onSaveEdit }) => {
+const CourseList = ({User, SelectedProgram, FilteredCourses, onAddCourse, onEditCourse, onDeleteCourse, editingCourse, onSaveEdit }) => {
+    const [isVisible, setIsvisible] = useState(false)
     const [newCourse, setNewCourse] = useState({
         IDCourse: '',
         courseName: '',
@@ -15,7 +16,11 @@ const CourseList = ({ SelectedProgram, FilteredCourses, onAddCourse, onEditCours
         seatsAvailable: '',
         classSize: ''
     });
-
+    console.log(User.role)
+/*
+    if(User.role === 'Admin') setIsvisible(true)
+    else setIsvisible(false)
+*/
     const handleNewCourseChange = (e) => {
         const { name, value } = e.target;
         setNewCourse({ ...newCourse, [name]: value });
@@ -52,7 +57,7 @@ const CourseList = ({ SelectedProgram, FilteredCourses, onAddCourse, onEditCours
             <h2 className="mb-3">Courses for: {SelectedProgram}</h2>
 
             {/* Add New Course Form */}
-            <div className="add-course-form mb-3">
+           {User.role === 'Admin' && <div className="add-course-form mb-3">
                 <input
                     type="text"
                     name="courseName"
@@ -134,7 +139,7 @@ const CourseList = ({ SelectedProgram, FilteredCourses, onAddCourse, onEditCours
                     className="form-control mb-2"
                 />
                 <button onClick={handleAddCourse} className="btn btn-primary">Add New Course</button>
-            </div>
+            </div> }
 
             {/* Display Course List */}
             {FilteredCourses.map((course) => (

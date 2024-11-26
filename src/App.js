@@ -87,7 +87,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard User = {user}/>} />
             <Route path="profiles" element={<Profiles User = {user}/>} /> {/* I get the profile updated with user data that comes from sign up or login*/}
             <Route path="addCourses" element={<AddCourses User = {user} SetUser = {SetUser}/>} />
-            <Route path="programs" element={<Programs />} />
+            <Route path="programs" element={<Programs User={user} />} />
             <Route path="mycourses" element={<StudentCourses User={user} SetUser={SetUser} />} />
             <Route path="about" element={<About />} />
             <Route path="student-list" element={<StudentList />} />

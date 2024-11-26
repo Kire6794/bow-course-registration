@@ -88,7 +88,7 @@ const AddCourses = ({ User, SetUser }) => {
                     {editCourse && <EditCourseForm course={editCourse} onSave={handleEditCourse} />}
 
                     {/* Admin: View All Courses */}
-                    <CourseList courses={courses} onEditCourse={setEditCourse} onDeleteCourse={handleDeleteCourse} />
+                    <CourseList User={User} courses={courses} onEditCourse={setEditCourse} onDeleteCourse={handleDeleteCourse} />
                 </>
             ) : (
                 <>
