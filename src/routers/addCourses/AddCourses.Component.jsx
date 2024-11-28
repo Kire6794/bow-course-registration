@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Selector from '../../components/selector/Selector.Component'; // Selector component
-import AddCourseList from '../../components/courses-list/AddCourseList.Component'; // For adding courses to user's list
-import AddNewCourseForm from '../../routers/addCourses/AddNewCourseForm'; // For adding new courses by admin
-import CourseList from '../../components/courses-list/CourseList.Component'; // Admin Course List
+import Selector from '../../components/selector/Selector.Component.jsx'; // Selector component
+import AddCourseList from '../../components/courses-list/AddCourseList.Component.jsx'; // For adding courses to user's list
+import AddNewCourseForm from './AddNewCourseForm.jsx'; // For adding new courses by admin
+import CourseList from '../../components/courses-list/CourseList.Component.jsx'; // Admin Course List
 import EditCourseForm from '../../components/courses-list/EditCourseForm.jsx'; // Admin Edit Form
-import { programsData } from '../../data/programData'; // Program data
+import { programsData } from '../../data/programData.js'; // Program data
 import './addCourses.style.css'; // Style for AddCourses
 
 
