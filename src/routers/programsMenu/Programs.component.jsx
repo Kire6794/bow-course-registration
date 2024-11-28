@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { programsData } from '../../data/programData';
 import CourseList from '../../components/courses-list/CourseList.Component';
 
-const Programs = () => {
+const Programs = ({User}) => {
     const [selectedProgram, setSelectedProgram] = useState('Diploma (2 years)'); // Default program
     const [programs, setPrograms] = useState(programsData); // Store a copy of programsData for state manipulation
     const [editingCourse, setEditingCourse] = useState(null); // Store the course being edited
@@ -13,13 +13,15 @@ const Programs = () => {
 
     // Add Course
     const addCourse = (newCourse) => {
-        const updatedPrograms = programs.map(program => {
-            if (program.programType === selectedProgram) {
-                return { ...program, courses: [...program.courses, newCourse] };
-            }
-            return program;
-        });
-        setPrograms(updatedPrograms);
+        if(selectedProgram==='Diploma (2 years)'){
+            programsData[0].courses.push(newCourse)
+        }
+        else if(selectedProgram==='Post-Diploma (1 year)'){
+            programsData[1].courses.push(newCourse)
+        }
+        else if(selectedProgram==='Certificate (6 months)'){
+            programsData[2].courses.push(newCourse)
+        }
     };
 
     // Update Course
@@ -79,6 +81,7 @@ const Programs = () => {
                     onDeleteCourse={deleteCourse}
                     editingCourse={editingCourse}
                     onSaveEdit={updateCourse}
+                    User={User}
                 />
             ) : (
                 <p className="text-center">Please select a program to see the details.</p>
