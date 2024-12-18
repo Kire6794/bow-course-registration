@@ -11,8 +11,9 @@ const Selector = ({Category,Items, SetSelectorValue, SelectedValue})=>{
           className="form-select"
           value={SelectedValue}
           onChange={(e) => SetSelectorValue(e.target.value)}
+          
         >
-          <option value="">--Select a Program--</option>
+          <option  value="">--Select a Program--</option>
 
           {Items.map((item, index) => (
             <option key={index} value={item}>{item}</option>

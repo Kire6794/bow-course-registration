@@ -1,0 +1,84 @@
+/* This goes for the global css */
+.profileBar{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 20vw;
+    /* this color need to be changed */
+    background-color: #333;
+    position: fixed;
+    right: -20vw;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+
+/* this goes in this file */
+.profileBar__list{
+    list-style: none;
+    padding:0.5rem;
+}
+
+.profileBar__item{
+    
+    margin: 2rem 0;
+}
+
+.profileBar__link{
+    color: white;
+    text-decoration: none;
+    font-size:1.5rem;
+}
+
+.profileBar--visible{
+    right: 0;
+}
+
+.profileBar__item:hover{
+    background-color: #737171;
+    text-decoration: underline;
+}
+
+.profileBar__item--login{
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBar__item--dashboard{
+    display: none;
+}
+
+.profileBar__item--profiles{
+    display: none;
+}
+.profileBar__item--courses{
+    display: none;
+}
+
+.admin{
+    display: none;
+}
+.profileBar__item--visible{
+    display:flex;
+    flex-direction: column;
+}
+
+.profileBar__item--dashboard--Visible{
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBar__item--profiles--Visible{
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBar__item--courses--Visible{
+    display: flex;
+    flex-direction: column;
+}
+
+.profileBar__item--login--noVisible{
+    display: none;
+    
+}

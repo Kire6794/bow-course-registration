@@ -16,64 +16,24 @@ import StudentList from './routers/studentLis/StudentLis.components';
 import Forms from './routers/forms/AdminForms.Component';
 import Login from './routers/login/Login.componen';
 import StudentCourses from './routers/courses/CoursesStudent.components';
-
-/*
-    firstName: "Michael",
-    lastName: "Johnson",
-    email: "michaeljohnson@email.com",
-    phone: "555-123-4567",
-    birthday: "2001-03-10",
-    department: "Software Development",
-    program: "Certificate (6 months)",
-    username: "michael.johnson",
-    password: "mjPass789",
-    role: "Student",
-    courses: [
-      {
-        courseName: "HTML & CSS Basics",
-        courseCode: "SD-402",
-        typeTerm: "Spring",
-        courseDay: "Wednesday",
-        courseTime: "1:00 PM - 3:00 PM",
-        deliveryMode: "Online",
-      },
-      {
-        courseName: "JavaScript Essentials",
-        courseCode: "SD-403",
-        typeTerm: "Summer",
-        courseDay: "Thursday",
-        courseTime: "2:00 PM - 4:00 PM",
-        deliveryMode: "In-Person",
-      },
-
-    ],
-
-*/
-
+import {nullUser} from './utilities/nullObjs.js'
 function App() {
+  //const nullUser = {firstName:'',lastName:'',email:'', countryCode:'', phone:'', birthday:'', department:'', program:'', username :'', password:'', role:''}
+  const [user, setUser] = useState(nullUser);
 
-  const [user, setUser] = useState({
-    firstName: "Robert",
-    lastName: "Miller",
-    email: "robertmiller@email.com",
-    countryCode: "+1",
-    phone: "654-987-3210",
-    birthday: "1975-06-10",
-    department: "Software Development",
-    program: "Certificate (6 months)",
-    username: "robert.miller",
-    password: "adminRobert123",
-    role: "Student",
-})
 
   const SetUser = (user)=>{
     setUser(user)
-  } 
-
+  }
+  // If the state is lost due to browser refresh this wil recover the user State.
   useEffect(()=>{
+    const user = JSON.parse(localStorage.getItem('user'))
+    user? SetUser(user) : SetUser(nullUser)
     console.log(user)
-  },[user])
+  }, [])
 
+
+  //useEffect(()=>console.log(user), [user])
   return (
     <Router>
       <div className="App">
@@ -81,13 +41,14 @@ function App() {
         {/* Definir las rutas que navegarán entre los componentes */}
         <Routes>
           <Route path="/" element={<View User={user} SetUser={SetUser}/>}> {/* paso el user para que modificar en el profileSideBar */}
-            <Route index path="Home" element={<Home />} />
-            <Route path="signup" element={<SignUp User={user} SetUser = {SetUser} />} /> {/* I pass a method to get the user info fetched from the server inside this component */}
-            <Route path="login" element={<Login  User={user} SetUser = {SetUser} />} />
+            <Route index element={<Home />} />
+            <Route path="Home" element={<Home />} />
+            <Route path="signup" element={<SignUp SetUser={SetUser}/>} /> {/* I pass a method to get the user info fetched from the server inside this component */}
+            <Route path="login" element={<Login SetUser={SetUser}/>} />
             <Route path="dashboard" element={<Dashboard User = {user}/>} />
             <Route path="profiles" element={<Profiles User = {user}/>} /> {/* I get the profile updated with user data that comes from sign up or login*/}
             <Route path="addCourses" element={<AddCourses User = {user} SetUser = {SetUser}/>} />
-            <Route path="programs" element={<Programs User={user} />} />
+            <Route path="programs" element={<Programs User = {user}/>} />
             <Route path="mycourses" element={<StudentCourses User={user} SetUser={SetUser} />} />
             <Route path="about" element={<About />} />
             <Route path="student-list" element={<StudentList />} />

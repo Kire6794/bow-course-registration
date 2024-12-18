@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';  // To handle navigation
+import { postData } from '../../utilities/fetchOps';
 
-import { usersData } from '../../data/usersData';
+const LoginForm = ({SetUser}) => {
 
-const LoginForm = ({User,SetUser}) => {
-    const [formData, setFormData] = useState({User});
-
-
+    const url = 'http://localhost:5000/api/v1/login'
+    const nullUser = {username :'', password:''}
+    const [formData, setFormData] = useState(nullUser);
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false)
+
     const navigate = useNavigate();  // For navigation
 
     const validate = () => {
@@ -21,57 +23,62 @@ const LoginForm = ({User,SetUser}) => {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        setErrors({ ...errors, [e.target.name]: '' });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) {
-            setErrors(validationErrors);
-        } else {
-            setErrors({});
-            setLoading(true);
-            try {
-                const response = await mockApiCall(formData);
-
-                //we get the role from the token
-                //And add it to the formData
-                
-                SetUser(response.data)
-
-                // Store token in local storage/session/cookies
-                //localStorage.setItem('token', response.header.token);
-
-                console.log('Login success:', response);
-                setLoading(false);
-
-                navigate('/Home')
-            } catch (error) {
-                console.error('Login error:', error);
-                setLoading(false);
-            }
+            setErrors(validationErrors)
+            setLoading(false)
+            return
+        } 
+                   
+        const response = await postData(url, formData);
+        if(response.submissionError){
+            console.log(response)
+            //setFormData(nullUser)
+            setErrors(response)
+            setLoading(false) 
+            return
         }
-    };
-
-    const mockApiCall = (data) => {
-
-      return new Promise((resolve) => {
-
-            setTimeout(() => {
-              console.log(data)
-              console.log(usersData[0])
-              data = usersData.find(user=> user.username===data.username && user.password===data.password)
-              if(!data) throw Error('Invalid username or password')
-              resolve({ message: 'Login successful', data });
-            }, 2000);
-      });
-
-    };
+        else if(response.data){
+            SetUser(response.data.userData)
+            const stringified = JSON.stringify(response.data.userData)
+            localStorage.setItem('user', stringified)
+            setErrors({})
+            setLoggedIn(true)
+            console.log('Login success:', response.data.userData);
+        }
+    }
 
     const goToSignup = () => {
         navigate('/signup');  // Redirect to signup page
-    };
+    }
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            setErrors({})
+        },5000)
+    },[errors])
+
+    useEffect(()=>{
+        if(loggedIn){
+            setTimeout(() => {
+                setLoggedIn(false)
+                setLoading(false)
+                navigate('/home')
+            }, 1500)
+        }
+    }, [loggedIn])
+
+    useEffect(()=>{
+        setTimeout(()=>{
+         setErrors({})
+        }, 5000)
+       }, [errors]) 
 
     return (
         <Container>
@@ -108,14 +115,16 @@ const LoginForm = ({User,SetUser}) => {
                                 </Form.Control.Feedback>
                             </Form.Group>
 
-                            <Button type="submit" variant="primary" disabled={loading}>
+                            <Button className='mt-3' type="submit" variant="primary" disabled={loading}>
                                 {loading ? 'Logging In...' : 'Log In'}
                             </Button>
                         </Form>
 
-                        <Button variant="secondary" className="mt-3" onClick={goToSignup}>
+                        <Button className='mt-3 mb-3' variant="secondary" onClick={goToSignup} disabled={loading}>
                             Sign Up
-                        </Button>
+                        </Button>   
+                       
+                        {errors.submissionError? (<div className="alert alert-danger" role="alert">{errors.submissionError}</div>) : loggedIn? (<div className="alert alert-success" role="alert">Logged In Successfully</div>) : <></>}
                     </div>
                 </Col>
             </Row>

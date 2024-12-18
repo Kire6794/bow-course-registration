@@ -24,10 +24,10 @@ const ProfileCard = (props)=>{
                   <div style={{ textAlign: 'justify'}}>
                     <p><strong>Student: </strong> {User.firstName}{" "}{User.lastName}</p>
                     <p><strong>Email:</strong> {User.email}</p>
-                    <p><strong>Phone:</strong> {`(${User.countryCode}) ${User.phone}`}</p>
+                    <p><strong>Phone:</strong> {`(+1) ${User.phone}`}</p>
                   </div>
                   <div style={{ textAlign: 'justify'}}>
-                    <p><strong>BOD:</strong> {User.birthday}</p>
+                    <p><strong>DOB:</strong> {User.birthday}</p>
                     <p><strong>Enrolled Dept:</strong> {User.department}</p>
                     <p><strong>Enrolled Program:</strong> { User.role === "Student"?User.program :"NA"}</p>
                     

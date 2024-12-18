@@ -1,62 +1,149 @@
-import React, { useState } from 'react';
-import { programsData } from '../../data/programData';
+import React, { useState, useEffect } from 'react';
 import CourseList from '../../components/courses-list/CourseList.Component';
+import { getData, postData } from '../../utilities/fetchOps.js'; 
+import {nullUser, nullCourse} from '../../utilities/nullObjs.js'
 
 const Programs = ({User}) => {
-    const [selectedProgram, setSelectedProgram] = useState('Diploma (2 years)'); // Default program
-    const [programs, setPrograms] = useState(programsData); // Store a copy of programsData for state manipulation
-    const [editingCourse, setEditingCourse] = useState(null); // Store the course being edited
+    console.log(1)
+    const [programs, setPrograms] = useState([]); // Store a copy of programsData for state manipulation
+    const [programTypes, setProgramTypes] = useState([])
+    const [selectedProgram, setSelectedProgram] = useState(''); // Default program
+    const [filteredCourses, setFilteredCourses] = useState([])
+    const [submitted, setSubmitted] = useState(false)
+    const [errors, setErrors] = useState({})
+    const [fadeOut, setFadeOut] = useState(false);
+    const [newCourse, setNewCourse]=useState(nullCourse)
 
-    // Find selected program details
-    const filteredProgram = programs.find(program => program.programType === selectedProgram);
-    const filteredCourses = filteredProgram ? filteredProgram.courses : [];
+    
+    useEffect(()=>{
+    const getProgramsData = async ()=>{
+        const url = 'http://localhost:5000/api/v1/programs'
+        const response = await getData(url)
+        if(response.submissionError)
+            console.log(response.submissionError)
+       
+        else if(response.data){
+            console.log(response.data)
+            setPrograms(response.data.programs)
+
+            //sets the drop down options from fetched program data
+            const dist = response.data.programs.filter((obj, index, self) => index === self.findIndex((t) => t.ProgramType === obj.ProgramType))
+            const programTypes= []
+            for(var obj of dist) {
+                programTypes.push(obj.ProgramType)
+            }      
+            setProgramTypes((programtypes) => programtypes = programTypes) 
+        }
+    }
+
+    if(programs.length === 0) getProgramsData()
+            
+    },[])
+
+    useEffect(()=>{
+        if (programs.length > 0 && selectedProgram) {
+            const filtered = programs.filter(program => program.ProgramType === selectedProgram);
+            setFilteredCourses(filtered)
+        }
+    }, [selectedProgram, programs])
+
+    const validate = (newCourse) => {
+        const newErrors = {};
+        if (User.role === nullUser.role ) {
+          newErrors.role = 'role is required';
+        }
+        else if (User.role === 'Admin') {
+            console.log(newCourse)
+            if (!newCourse.CourseName) {
+                console.log(newCourse.CourseName)
+                newErrors.CourseName = 'Course Name is required';
+            }
+            if (!newCourse.SeasonName) {
+                newErrors.SeasonName = 'Season Name is required';
+            }
+            if (!newCourse.SeasonName) {
+                newErrors.SeasonName = 'Season Name is required';
+            }
+            if (!newCourse.Description) {
+                newErrors.Description = 'Description is required';
+            }
+            if (!newCourse.CourseDay) {
+                newErrors.CourseDay = 'Course Day is required';
+            }
+            if (!newCourse.CourseTime) {
+                newErrors.CourseTime = 'Course Time is required';
+            }
+            if (!newCourse.Campus) {
+                newErrors.Campus = 'Campus is required';
+            }
+            if (!newCourse.DeliveryMode) {
+                newErrors.DeliveryMode = 'Description is required';
+            }
+            if (!newCourse.ClassSize) {
+                newErrors.ClassSize = 'Class Size is required';
+            }
+            if (!newCourse.ParentProgram) {
+                newErrors.ParentProgram = 'Parent Program is required';
+            }
+
+          }
+          return newErrors
+        }
+    
+
 
     // Add Course
-    const addCourse = (newCourse) => {
-        const updatedPrograms = programs.map(program => {
-            if (program.programType === selectedProgram) {
-                return { ...program, courses: [...program.courses, newCourse] };
-            }
-            return program;
-        });
-        setPrograms(updatedPrograms);
+    const addCourse = async (newCourse, setErrors2) => {
+        const url = `http://localhost:5000/api/v1/createcourse`
+  
+        const validationErrors = validate(newCourse);
+        if(Object.keys(validationErrors).length > 0){
+          console.log(validationErrors)
+          setErrors2(validationErrors)  
+          return
+        } 
+        const response = await postData(url, newCourse)
+        if(response.submissionError){
+            setSubmitted(false)
+            setErrors(response)
+            console.log(response.submissionError)
+        }
+        else if(response.data){
+            setNewCourse(newCourse)
+            setSubmitted(true)
+            setErrors({})
+            console.log(response.data)
+        }
+        setTimeout(() => {
+            setFadeOut(true);
+        }, 2500);
+
+        setTimeout(() => {
+            setSubmitted(false);
+            setFadeOut(false);
+            setErrors({});
+        }, 3000);
     };
 
-    // Update Course
-    const updateCourse = (updatedCourse) => {
-        const updatedPrograms = programs.map(program => {
-            if (program.programType === selectedProgram) {
-                return {
-                    ...program,
-                    courses: program.courses.map(course => course.IDCourse === updatedCourse.IDCourse ? updatedCourse : course)
-                };
-            }
-            return program;
-        });
-        setPrograms(updatedPrograms);
-        setEditingCourse(null); // End editing mode
-    };
 
-    // Delete Course
-    const deleteCourse = (courseID) => {
-        const updatedPrograms = programs.map(program => {
-            if (program.programType === selectedProgram) {
-                return {
-                    ...program,
-                    courses: program.courses.filter(course => course.IDCourse !== courseID)
-                };
-            }
-            return program;
-        });
-        setPrograms(updatedPrograms);
-    };
 
     return (
-        <div className="container my-4">
+        <>
+        {programs.length > 0 && <div className="container my-4">
             <h1 className="text-center mb-4">Programs</h1>
+            {submitted && (
+                <div className={`alert alert-success ${fadeOut ? 'fade-out' : ''}`} role="alert">
+                    Course {newCourse.CourseCode} Added Successfully
+                </div>
+            )}
 
+            {errors.submissionError && (
+                <div className={`alert alert-danger ${fadeOut ? 'fade-out' : ''}`} role="alert">
+                    {errors.submissionError}
+                </div>
+            )}
             <div className="mb-3">
-                <label htmlFor="program-select" className="form-label">Select a program:</label>
+                <label htmlFor="program-select" className="form-label">Select courses that belong to program type:</label>
                 <select
                     id="program-select"
                     className="form-select"
@@ -64,27 +151,27 @@ const Programs = ({User}) => {
                     onChange={(e) => setSelectedProgram(e.target.value)}
                 >
                     <option value="">--Select a Program--</option>
-                    {programs.map((program, index) => (
-                        <option key={index} value={program.programType}>{program.programType}</option>
+                    {programTypes.map((programType, index) => (
+                        <option key={index} value={programType}>{programType}</option>
                     ))}
                 </select>
             </div>
 
-            {filteredProgram ? (
+            {selectedProgram ? (
                 <CourseList
-                    User = {User}
                     SelectedProgram={selectedProgram}
+                    CourseSubmitted={submitted}
                     FilteredCourses={filteredCourses}
-                    onAddCourse={addCourse}
-                    onEditCourse={setEditingCourse}
-                    onDeleteCourse={deleteCourse}
-                    editingCourse={editingCourse}
-                    onSaveEdit={updateCourse}
+                    SetFilteredCourses={setFilteredCourses}
+                    AddCourse={addCourse}
+                    Errors={errors}
+                    User={User}
                 />
             ) : (
                 <p className="text-center">Please select a program to see the details.</p>
             )}
-        </div>
+        </div>}
+        </>
     );
 };
 

@@ -1,68 +1,79 @@
 
-import React, { useState } from 'react';
-//import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-//import './SignupForm.style.css'; // Puedes agregar estilos personalizados aquí
-//import '../App.css';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
+import {postData} from '../../utilities/fetchOps.js'
+import {nullUser} from '../../utilities/nullObjs.js'
 
-const SignupForm = ({User,SetUser}) => {
-  const [formData, setFormData] = useState(User);
+const SignupForm = ({SetUser}) => {
 
+  const url = 'http://localhost:5000/api/v1/signin'
+  //const nullUser = {firstName:'',lastName:'',email:'', countryCode:'', phone:'', birthday:'', department:'', program:'', username :'', password:'', role:''}
+  const [formData, setFormData] = useState(nullUser);
   const [errors, setErrors] = useState({});
+  const [registered, setRegistered] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [ifItIsDisabled, setDisabled] = useState(false)
+  
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const validate = () => {
     const newErrors = {};
-
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First name is required';
+    if (!formData.role) {
+      newErrors.role = 'role is required';
     }
+    else{
+      if (formData.role !== 'Admin') {
 
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last name is required';
+        if (!formData.department) {
+          newErrors.department = 'Department is required';
+        }
+        if (!formData.program) {
+          newErrors.program = 'Program is required';
+        }
+      }
+
+  
+      if (!formData.firstName.trim()) {
+        newErrors.firstName = 'First name is required';
+      }
+  
+      if (!formData.lastName.trim()) {
+        newErrors.lastName = 'Last name is required';
+      }
+  
+      if (!formData.email) {
+        newErrors.email = 'Email is required';
+      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        newErrors.email = 'Email is invalid';
+      }
+  
+      if (!formData.countryCode.trim()) {
+        newErrors.countryCode = 'Country code is required';
+      } else if (!/^\+\d+$/.test(formData.countryCode)) {
+        newErrors.countryCode = 'Country code is invalid (must start with + and digits)';
+      }
+  
+      if (!formData.phone) {
+        newErrors.phone = 'Phone number is required';
+      } else if (!/^\d+$/.test(formData.phone)) {
+        newErrors.phone = 'Phone number should contain only digits';
+      }
+  
+      if (!formData.birthday) {
+        newErrors.birthday = 'Birthday is required';
+      }
+  
+      if (!formData.username.trim()) {
+        newErrors.username = 'Username is required';
+      }
+  
+      if (!formData.password) {
+        newErrors.password = 'Password is required';
+      } else if (formData.password.length < 6) {
+        newErrors.password = 'Password must be at least 6 characters';
+      }
     }
-
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-    }
-
-    if (!formData.countryCode.trim()) {
-      newErrors.countryCode = 'Country code is required';
-    } else if (!/^\+\d+$/.test(formData.countryCode)) {
-      newErrors.countryCode = 'Country code is invalid (must start with + and digits)';
-    }
-
-    if (!formData.phone) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^\d+$/.test(formData.phone)) {
-      newErrors.phone = 'Phone number should contain only digits';
-    }
-
-    if (!formData.birthday) {
-      newErrors.birthday = 'Birthday is required';
-    }
-
-    if (!formData.department) {
-      newErrors.department = 'Department is required';
-    }
-
-    if (!formData.program) {
-      newErrors.program = 'Program is required';
-    }
-
-    if (!formData.username.trim()) {
-      newErrors.username = 'Username is required';
-    }
-
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
-
     return newErrors;
   };
 
@@ -72,37 +83,69 @@ const SignupForm = ({User,SetUser}) => {
   const handleRadioChange = (e) => {
     setFormData({ ...formData, ["role"]: e.target.value })
   }
-    ;
-  
 
-  const handleSubmit = (e) => {
-    //SetUser(null)
+ 
+  const handleSubmit = async (e) => {
+   
     e.preventDefault();
+    setLoading(true)
     const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      SetUser(formData)
-    } else {
-      setErrors({});
-      console.log('User signed up:', formData);
-      SetUser(formData)
-      
-      // Aquí agregarías la lógica para enviar los datos al backend
+    if(Object.keys(validationErrors).length > 0){
+      console.log(validationErrors)
+      setErrors(validationErrors)  
+      return
+    } 
 
-      //Por aqui de el setter del user para pasar la informacion del user recien registrado a los demas componentes
-      //En caso de que despues de registrar se quiera loggear automaticamente al user.
-      // El Login tiene su propio fetch con GET
-      // El SignUp tiene su propio fetch con POST y esperaria los datos del usuario
-      // El usuario enviaria la contrasena pero recibiria su informacion nuevamente sin la contrasena
+    const response = await postData(url, formData)
+    console.log(response)
 
-      //If the login is ok go to the dashboard
-      navigate('/dashboard')
+    if(response.submissionError){
+      console.log(response)
+      SetUser(nullUser)
+      setErrors(response)
+      setLoading(false)  
+      return
+    } 
+    else if(response.data){
+      console.log('User signed up:', response.data.newUserData)
+      setErrors({})
+      SetUser(response.data.newUserData)
+      localStorage.setItem('user', JSON.stringify(response.data.newUserData))
+      setRegistered(true) 
     }
-  };
+  }
 
+  useEffect(()=>{
+    if(formData.role === 'Admin')
+      setDisabled(true)
+    else setDisabled(false)
+  }, [formData] )
+
+  useEffect(()=>{
+   setTimeout(()=>{
+    setErrors({})
+   }, 5000)
+  }, [errors]) 
+
+  useEffect(()=>{
+    if(registered){
+      setTimeout(()=>{
+        setRegistered(false)
+        setLoading(false) 
+        navigate('/Home')
+      }, 3000)
+    }
+   }, [registered]) 
+       
+  
   return (
     <form onSubmit={handleSubmit} className="container" style={{ display: 'flex', flexDirection: 'column' }} >
-      <div className="row mb-3" >
+      {errors.submissionError && (
+      <div className="alert alert-danger" role="alert">
+        That user already exists.
+      </div>
+    )}
+      <div className="row mb-3" >           
         <div className="col">
           <input
             type="text"
@@ -171,6 +214,7 @@ const SignupForm = ({User,SetUser}) => {
 
       <div className="mb-3">
         <select
+          disabled = {ifItIsDisabled}
           name="department"
           className={`form-select ${errors.department ? 'is-invalid' : ''}`}
           onChange={handleChange}
@@ -183,6 +227,7 @@ const SignupForm = ({User,SetUser}) => {
 
       <div className="mb-3">
         <select
+          disabled = {ifItIsDisabled}
           name="program"
           className={`form-select ${errors.program ? 'is-invalid' : ''}`}
           onChange={handleChange}
@@ -216,12 +261,13 @@ const SignupForm = ({User,SetUser}) => {
         />
         {errors.password && <div className="invalid-feedback">{errors.password}</div>}
       </div>
-      <div className="mb-3">
+      <div className={"mb-3"}>
         <label>
           <input
             value="Student"
             type="radio"
             name="role"
+            className={`${errors.role ? 'is-invalid' : ''}`}
             onChange={handleRadioChange}
           />
           Student
@@ -231,14 +277,19 @@ const SignupForm = ({User,SetUser}) => {
             value="Admin"
             type="radio"
             name="role"
+            className={errors.role ? 'is-invalid' : ''}
             onChange={handleRadioChange}
-          />
-          Admin
-        </label>
-        {errors.role && <div className="invalid-feedback">{errors.role}</div>}
+          />        
+          Admin 
+        </label>        
       </div>
+   
+      {errors.role && <div className="alert alert-danger" role="alert">{errors.role}</div>}
 
-      <button type="submit" className="btn btn-primary">Sign Up</button>
+      <button type="submit" className="btn btn-primary" disabled={loading}>Sign Up</button>
+
+      {registered && <div className="mt-3 alert alert-success" role="alert"> You were registered successfully </div>}
+
     </form>
   );
 

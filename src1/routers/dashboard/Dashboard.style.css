@@ -1,0 +1,16 @@
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: space-between;
+}
+.container{
+    border: 0.5px solid rgba(0, 0, 0, 0.155);
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
+
+}
+
+.dashboard__program--visible{
+    display: none;
+}

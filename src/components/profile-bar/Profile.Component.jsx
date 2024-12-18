@@ -1,16 +1,23 @@
 import React from 'react';
 import './Profile.style.css';
 import { Link } from 'react-router-dom'; // Importa Link
+import {getData} from '../../utilities/fetchOps.js'
+import {useNavigate} from 'react-router-dom'
 // import { usersData } from '../../data/usersData';
 
 // passing the value as props
 
 const ProfileBar =({isVisibleP, User, SetUser})=>{
-    // const {isVisible,ShowHideSideBar} = UseShowHideSideBar(false);
-    
-    // agregar el resto de componentes en el ul
-    const LogOutUser = ()=>{
-        SetUser({...User, ["role"]:""})
+
+    const navigate = useNavigate()
+
+    const LogOutUser = async ()=>{
+        const url = 'http://localhost:5000/api/v1/logout'
+        await getData(url)
+        SetUser({})
+        localStorage.removeItem('user');
+        navigate('Home')
+        
     }
 
 

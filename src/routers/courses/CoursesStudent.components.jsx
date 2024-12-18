@@ -1,16 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getData, deleteData } from '../../utilities/fetchOps';
 
-const StudentCourses = ({ User,SetUser }) => {
+const StudentCourses = ({ User }) => {
+  
+  const[userCourses, setUserCourses] = useState([])
+  const [errors, setErrors] = useState({})
 
-  const removeCourse = (codeCourse) =>{
-    //in react when i use setUser inside a function, recives the actual user as prevUser
-    SetUser((prevUser)=>({
+  useEffect(()=>{
+    const getStudentCourses = async ()=>{
+      const url = `http://localhost:5000/api/v1/mycourses/${User.userID}`
+      console.log(User.userID)
+      const response = await getData(url)
+      if (response.submissionError ) console.log(response.submissionError)
+      else if(response.data) setUserCourses(response.data.courses)     
+    }
+    
+    if(!isNaN(User.userID) && userCourses.length === 0) getStudentCourses()
+      
+    },[User])
 
-      //im passing the prevUser as the state just before changing it,so i create a copy with the spreed operator
-            //just to change a propertie and save the others
-      ...prevUser,
-      courses: prevUser.courses.filter((course)=>course.codeCourse !== codeCourse),
-    }))
+  const removeCourse = async (courseCode) =>{
+    const url = `http://localhost:5000/api/v1/dropcourse/${User.userID}/?courseCode=${courseCode}`
+    const response = await deleteData(url)
+    if (response.submissionError ) {
+      console.log(response.submissionError)
+      setErrors(response)
+    }
+    else if(response.data) {  
+      const newCoursesList = userCourses.filter((course)=> course.CourseCode[0] !== courseCode)
+      console.log(newCoursesList)
+      setUserCourses(newCoursesList)
+    }
+ 
   }
 
 
@@ -21,13 +42,13 @@ const StudentCourses = ({ User,SetUser }) => {
       <h2 className="mb-4 text-center">{User.firstName} {User.lastName}</h2>
       <h3 className="mb-4 text-center">Program: {User.program}</h3>
 
-      {User.courses.length > 0 ? (
+      {User.program? (
         <div className="program-section">
           <h2 className="mb-3">Your courses:</h2>
-          {User.courses.map((course, index) => (
+          {userCourses.length > 0 && userCourses.map((course, index) => (
             <div key={index} className="card mb-3">
               <div className="card-header">
-                <h5 className="card-title">{course.courseName} ({course.codeCourse})</h5>
+                <h5 className="card-title">{course.CourseName} ({course.CourseCode[0]})</h5>
                 <p className="card-subtitle mb-2 text-muted"><strong>Code:</strong> {course.codeCourse}</p>
               </div>
 
@@ -35,13 +56,13 @@ const StudentCourses = ({ User,SetUser }) => {
 
                 <div className="course-info" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                   <div style={{ textAlign: 'justify' }}>
-                    <p><strong>Day:</strong> {course.courseDay}</p>
-                    <p><strong>Time:</strong> {course.courseTime}</p>
-                    <p><strong>Delivery Mode:</strong> {course.deliveryMode}</p>
+                    <p><strong>Day:</strong> {course.CourseDay}</p>
+                    <p><strong>Time:</strong> {course.CourseTime}</p>
+                    <p><strong>Delivery Mode:</strong> {course.DeliveryMode}</p>
                   </div>
                 </div>
                 {/* i have to pass the function onClick like this: ()=>removeCourse.... to prevent the execution of it in the first render. */}
-                <button className='btn btn-danger mt-3' onClick={()=>removeCourse(course.codeCourse)}>Drop course</button>
+                <button className='btn btn-danger mt-3' onClick={()=>removeCourse(course.CourseCode[0])}>Drop course</button>
                 
               </div>
             </div>

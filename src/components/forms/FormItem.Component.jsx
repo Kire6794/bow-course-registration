@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import MessageContent from './MessageContent.Component'
 
 const FormItem = ({Key, Form, onDelete})=>{
@@ -18,6 +18,7 @@ const FormItem = ({Key, Form, onDelete})=>{
             case "Open":
                 setDropBtnText("Close")
                 break
+            default: return
 
         }
     }
@@ -45,8 +46,7 @@ const FormItem = ({Key, Form, onDelete})=>{
                 <span
                     class="badge text-bg-danger rounded-pill mt-3 ms-1"
                     style={{ cursor: 'pointer' }}
-                    onClick = {onDelete}
-             
+                    onClick = {onDelete}          
                 >
                     Delete
                 </span>
